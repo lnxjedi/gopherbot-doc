@@ -48,3 +48,9 @@ setup)
 > NOTE: the quickest way to open a second terminal is to click the "Split Terminal" box in the upper-right corner of your initial terminal.
 
 That's it - your robot is ready to be deployed and start doing some work. Once you've saved the robot's `.env` file to a safe location, you can delete the container. The rest of this manual details deploying and managing your robot.
+
+**7.** To clean up:
+```
+$ docker stop clu
+$ docker rm clu
+```
