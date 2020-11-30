@@ -1,14 +1,28 @@
 # Quick Start with Autosetup
 
-If you've installed the [Gopherbot software](../Installation.md) on a Linux host or VM, you can create a new robot quickly using the **autosetup** plugin. Using **Clu** as an example:
+The best way to set up a new robot is using the [gopherbot-dev](https://quay.io/repository/lnxjedi/gopherbot-dev) container image running in [Docker](https://www.docker.com/) on your workstation. Using **Clu** as an example:
 
-**1.** Create an empty directory for your robot and use the `init` CLI command to retrieve an `answerfile.txt` template for your team chat protocol:
+**1.** Start a new, empty `gopherbot-dev` container:
 
 ```
-[~]$ mkdir clu
-[~]$ cd clu/
-[clu]$ /opt/gopherbot/gopherbot init slack
-Edit 'answerfile.txt' and run './gopherbot' with no arguments to generate your robot.
+$ docker run -p 127.0.0.1:3000:3000 --name clu quay.io/lnxjedi/gopherbot-dev:latest
+root INFO Configuration directory URI: 'file:///home/robot/.theia'
+...
+root INFO Deploy plugins list took: 441.6 ms
+```
+
+**2.** Open your browser and browse to `http://127.0.0.1:3000` to view the [Theia](https://github.com/eclipse-theia/theia) interface.
+
+**3.** Open a terminal with **ctrl-shift-`**, and run `gopherbot`:
+```
+$ gopherbot
+2020/11/30 16:00:23 Logging to robot.log; warnings and errors duplicated to stdout
+Terminal connector running; Use '|c<channel|?>' to change channel, or '|u<user|?>' to change user
+general: *******
+general: Welcome to the *Gopherbot* terminal connector. Since no configuration was detected, you're connected to 'floyd', the default robot.
+general: If you've started the robot by mistake, just hit ctrl-D to exit and try 'gopherbot --help'; otherwise feel free to play around with the default robot - you can start by typing 'help'. If you'd
+like to start configuring a new robot, type: ';setup <protocol>'.
+c:general/u:alice ->
 ```
 
 **2.** Use the editor of your choice to edit the `answerfile.txt` template. Note that the answerfile template also contains documentation regarding the requirements for setting up your robot, including information on obtaining credentials for your robot to use with team chat.
