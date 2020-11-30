@@ -1,11 +1,11 @@
 # Requirements
 
-Since **Gopherbot** is primarily a *Go* daemon that utilizes external tools and scripts to perform most of the real work, you'll probably want to have most of the (common) listed dependencies. Note that if you deploy your robot in a container, most of these are included in the base container.
+Since **Gopherbot** is primarily a *Go* daemon that utilizes external tools and scripts to perform most of the real work, you'll probably want to have most of the (common) listed dependencies. Note that if you deploy your robot in a container, most of these are included in the base container, which you can further customize by adding your own tools. ([Data](https://github.com/parsley42/data-gopherbot/blob/master/Containerfile) is the best example of this.)
 
 * `git` - with version 2, **Gopherbot** is tightly integrated with git for updating configuration and keeping state; **Gopherbot** requires fairly recent versions of *git* supporting `git remote get-url ...`
    * Note that the version of *git* in CentOS 7 is not supported, see the [Inline with Upstream Stable](https://ius.io/) site for a newer version
 * `ssh` - robots configured from this manual require *ssh* for setup and deployment; additionally, most robots should have an encrypted private key / public key pair for performing *git* operations and running remote jobs
-* `bash` - the majority of the *batteries included* scripts included with **Gopherbot** are written in good 'ol **Bash**; this is nearly universal but listed here for containerized deployments
+* `bash` - the majority of the *batteries included* scripts included with **Gopherbot** are written in good 'ol **Bash**; this is nearly universal but listed here for those that may wish to build containers from scratch, since many base containers have much less functional `/bin/sh` shells. (busybox for example)
 * `jq` - required by the `gopherbot/lib/gopherbot_v1.sh` **bash** library for parsing the **JSON** responses from the robot
    * Note this is available from the [EPEL](https://fedoraproject.org/wiki/EPEL) repositories for CentOS 7
 * `python` - (version 3) next to `bash`, the second most common language for extensions is **python** version 3, which includes several management jobs

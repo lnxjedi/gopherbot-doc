@@ -2,7 +2,7 @@
 
 [Title](Title.md)
 
-[Foreward](Foreward.md)
+[Foreword](Foreword.md)
 
 [Introduction](Introduction.md)
 

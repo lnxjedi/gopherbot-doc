@@ -1,8 +1,16 @@
 # Installing the `gopherbot` software archive
 
-The latest release, pre-release and beta versions are available for download on the [Github](https://github.com) releases page for [gopherbot](https://github.com/lnxjedi/gopherbot/releases).
+Since **Gopherbot** version 2 defaults to a build using Go modules, the default `Makefile` creates a binary that links to the system `glibc`; thus, I no longer distribute pre-built binaries that may or may not work on a given system. Instead, you can easily build the distribution archive yourself.
 
-1. As **root**, download the `.tar.gz` or `.zip` archive of your choice, and extract the archive in `/opt` to create `/opt/gopherbot`, e.g.:
+**Requirements:**
+* A recent (1.14+) version of Go
+* Standard build utilities; make, tar, gzip
+* A Linux system to build on that matches your target deployment host
+
+**Steps:**
+1. Clone the **Gopherbot** repository: `git clone https://github.com/lnxjedi/gopherbot.git`
+1. `make dist` in the repository root
+1. Extract the archive in `/opt` to create `/opt/gopherbot`, e.g.:
 ```shell
 [root]# cd /opt
 [opt]# wget https://github.com/lnxjedi/gopherbot/releases/download/v2.0.0-snapshot/gopherbot-linux-amd64.tar.gz
@@ -27,13 +35,13 @@ The latest release, pre-release and beta versions are available for download on 
 * `conf/` - the default configuration, overridden by individual robots
 * `lib/` - API libraries for `bash`, `python` and `ruby`
 * `plugins/` - external script plugins
-* `plugins/samples` - sample plugins that show API usage but aren't otherwise useful
+* `plugins/samples` - sample plugins that show API usage but aren't otherwise very useful
 * `tasks/` - a collection of pipeline task scripts
 * `jobs/` - a collection of jobs for robot management (backup/restore) and CI/CD
 * `helpers/` - helper scripts not directly called by the robot
-* `resources/` - miscellaneous useful bits for a running robot, also *Dockerfiles*
-* `doc/` - the source for this documentation on [github pages](https://lnxjedi.github.io/gopherbot/)
-* `robot.skel/` - the initial configuration for new robots
+* `resources/` - miscellaneous useful bits for a running robot, also the *Containerfiles* used for publishing the stock containers
+* `doc/` - deprecated; contents moved to [gopherbot-doc](https://github.com/lnxjedi/gopherbot-doc)
+* `robot.skel/` - the initial configuration for new robots, analogous to the contents of `/etc/skel`
 * `licenses/` - licenses for other packages used by **Gopherbot**, as required
 
 # Privilege Separation
