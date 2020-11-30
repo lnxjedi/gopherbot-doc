@@ -1,0 +1,1 @@
+This repository holds the markdown sources for the documentation at [lnxjedi.github.io/gopherbot](https://lnxjedi.github.io/gopherbot). The rendered pages are kept in the `gh-pages` branch of the main [gopherbot repository](https://github.com/lnxjedi/gopherbot), just to make the documentation URL look nice (and stick with what it has been previously).
