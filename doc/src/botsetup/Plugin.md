@@ -13,7 +13,7 @@ root INFO Deploy plugins list took: 441.6 ms
 
 **2.** Open your browser and browse to `http://127.0.0.1:3000` to view the [Theia](https://github.com/eclipse-theia/theia) interface.
 
-**3.** Open a terminal with **ctrl-shift-`**, and run `gopherbot`:
+**3.** Open a terminal from the `Terminal` menu, and run `gopherbot`:
 ```
 $ gopherbot
 2020/11/30 16:00:23 Logging to robot.log; warnings and errors duplicated to stdout
