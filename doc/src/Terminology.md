@@ -10,7 +10,7 @@ This section is most important for referring back to as you read the documentati
    * **Robot** - The object passed to user plugins, jobs and tasks
    * **robot** - the **Go** library for loadable modules, i.e. `import github.com/lnxjedi/robot`
 * **default robot** - If you run Gopherbot with no custom configuration, you get *Floyd*, the default robot
-* **standard robot** - A standard robot is what you get from using `robot.skel` or running the `autosetup` plugin from the **default robot**; more generally, any robot that has the standard `robot.skel` configuration as it's base is still a **standard robot**
+* **standard robot** - A standard robot is what you get from using `robot.skel` or running the `autosetup` plugin from the **default robot**; more generally, any robot that has the standard `robot.skel` configuration as its base is still a **standard robot**
 * **GOPHER_HOME** - The top-level directory for a given robot; the **Gopherbot** binary (`/opt/gopherbot/gopherbot`) is run from this directory to start or interact with the robot
 * **bootstrapping** - When you start the `gopherbot` daemon in a container with a few environment variables, or in an empty directory with a suitable `.env` environment file, the **bootstrap** plugin included with the **default robot** will use a deploy key to pull your robot from a *git* repository and start it up; this process is called **bootstrapping** your robot, and allows deploying your robot to new environments quickly
 * **plugin** (or **command plugin**) - A piece of code that provides new interactive commands; plugins may also provide code for authorization and/or elevation, which may also interact with users
