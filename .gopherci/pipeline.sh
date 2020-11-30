@@ -1,3 +1,16 @@
+#!/bin/bash
+
+# pipeline.sh - trusted pipeline script for gopherci for Gopherbot
+
+source $GOPHER_INSTALLDIR/lib/gopherbot_v1.sh
+
+if [ -n "$NOTIFY_USER" ]
+then
+    FailTask notify $NOTIFY_USER "Gopherbot build failed"
+fi
+
+FailTask email-log parsley@linuxjedi.org
+
 # Initialize ssh for updating docs repo
 AddTask ssh-init
 
