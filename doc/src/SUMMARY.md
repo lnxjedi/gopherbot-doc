@@ -15,8 +15,6 @@
         - [Requirements](botsetup/Requirements.md)
         - [Robot Directory Structure](botsetup/gopherhome.md)
         - [Quick Start with Autosetup](botsetup/Plugin.md)
-        - [Setting up a Robot with Gitpod](botsetup/Gitpod.md)
-        - [Setup with Containers](botsetup/ContainerSetup.md)
         - [Manual Setup](botsetup/ManualSetup.md)
             - [Create the `GOPHER_HOME` directory](botsetup/bothome.md)
             - [Create the Initial `.env` File](botsetup/initenv.md)
