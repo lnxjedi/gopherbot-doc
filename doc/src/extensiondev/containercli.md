@@ -1,6 +1,6 @@
 # Container Operation
 
-The next best option to a local install is running the CLI in a container; just drop your robot's `.env` file in a directory and run the one of the [stock images](https://quay.io/lnxjedi/gopherbot), overriding the entrypoint. Using `podman` as an example:
+The next best option to a local install is running the CLI in a container; just drop your robot's `.env` file in a directory and run the one of the [stock images](https://quay.io/lnxjedi), overriding the entrypoint. Using `podman` as an example:
 ```
 [parse@hakuin ~]$ mkdir clu
 [parse@hakuin ~]$ cd clu/

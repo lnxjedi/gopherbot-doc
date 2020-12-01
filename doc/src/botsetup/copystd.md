@@ -1,7 +1,7 @@
 # Copy and Modify the Standard Robot
 Now copy the contents of `robot.skel` from the distribution archive to the new `custom/` directory:
 ```shell
-davidparsley@penguin:/home/robots/clu$ cp -a /opt/gopherbot/robot.skel/* /opt/gopherbot/robot.skel/.??* custom/
+davidparsley@penguin:/home/robots/clu$ cp -a /opt/gopherbot/robot.skel/* custom/
 ```
 > Note the `.??*` wildcard picks up any hidden files
 
@@ -11,7 +11,6 @@ With encryption initialized, you can use the `gopherbot encrypt` command to gene
 davidparsley@penguin:/home/robots/clu$ ./gopherbot encrypt 123-abc-XXXXX
 FverBqdWHzHfEPDy/cQ8U9AJ3z4v8KdGSubDMALPfHIupwDLctDWQ1c=
 ```
-(Note that we use `-l robot.log` to send some superfluous error messages to a log file)
 
 Now edit your `conf/slack.yaml` file and replace `<slackencrypted>` with the ciphertext, e.g.:
 ```yaml

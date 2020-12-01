@@ -13,8 +13,7 @@ Since **Gopherbot** version 2 defaults to a build using Go modules, the default 
 1. Extract the archive in `/opt` to create `/opt/gopherbot`, e.g.:
 ```shell
 [root]# cd /opt
-[opt]# wget https://github.com/lnxjedi/gopherbot/releases/download/v2.0.0-snapshot/gopherbot-linux-amd64.tar.gz
-[opt]# tar xzf gopherbot-linux-amd64.tar.gz
+[opt]# tar xzf /path/to/gopherbot/gopherbot-linux-amd64.tar.gz
 ```
 2. (Optional) Also as root, make the `gopherbot` binary **setuid nobody** (see [below](#privilege-separation)):
 ```shell

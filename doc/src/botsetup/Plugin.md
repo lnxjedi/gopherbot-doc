@@ -1,6 +1,6 @@
 # Quick Start with Autosetup
 
-The best way to set up a new robot is using the [gopherbot-dev](https://quay.io/repository/lnxjedi/gopherbot-dev) container image running in [Docker](https://www.docker.com/) on your workstation. Using **Clu** as an example:
+The best way to set up a new robot is using the [gopherbot-dev](https://quay.io/repository/lnxjedi/gopherbot-dev?tab=info) container image running in [Docker](https://www.docker.com/) on your workstation. Using **Clu** as an example:
 
 **1.** Start a new, empty `gopherbot-dev` container:
 
@@ -10,6 +10,7 @@ root INFO Configuration directory URI: 'file:///home/robot/.theia'
 ...
 root INFO Deploy plugins list took: 441.6 ms
 ```
+> Note: Normally `podman` can be used as a drop-in replacement for `docker`, but on my Fedora 33 workstation, an odd bug is preventing directories from being removed. YMMV, but as of this writing `docker` can be installed from nightly builds, even though it's not in the main repositories.
 
 **2.** Open your browser and browse to `http://127.0.0.1:3000` to view the [Theia](https://github.com/eclipse-theia/theia) interface.
 
@@ -25,7 +26,7 @@ Edit 'answerfile.txt' and re-run gopherbot with no arguments to generate your ro
 
 **5.** When you've finished editing and saving `answerfile.txt`, re-run `gopherbot`; your robot will process the answerfile to generate your robot's initial configuration:
 ```
-$ ./gopherbot 
+$ gopherbot 
 2020/03/22 10:40:57 Info: Logging to robot.log
 null connector: Initializing encryption and restarting...
 2020/03/22 10:40:59 Info: Logging to robot.log
@@ -44,7 +45,7 @@ need this for completing setup.
 setup)
 ```
 
-**6.** Follow the instructions to add yourself as a robot administrator, and save your robot to it's *git* repository.
+**6.** Follow the instructions to get your robot connected to your team chat, add yourself as a robot administrator, and save your robot to it's *git* repository.
 > NOTE: the quickest way to open a second terminal is to click the "Split Terminal" box in the upper-right corner of your initial terminal.
 
 That's it - your robot is ready to be deployed and start doing some work. Once you've saved the robot's `.env` file to a safe location, you can delete the container. The rest of this manual details deploying and managing your robot.

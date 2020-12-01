@@ -38,7 +38,7 @@ The `custom/` directory is essentially *your robot*, and is generally used diffe
 ### During Development
 
 When developing jobs, tasks and plugins for your robot, you'll mostly use the terminal connector and treat `state/` as disposable. A fairly standard workflow goes like this:
-1. Run your robot with the [gopherbot-dev](https://quay.io/repository/lnxjedi/gopherbot-dev) container, providing an environment file for your robot
+1. Run your robot with the [gopherbot-dev](https://quay.io/repository/lnxjedi/gopherbot-dev?tab=info) container, providing an environment file for your robot
 1. Use the **terminal** connector, configured to mirror your team chat environment, for developing extensions for your robot
 1. In the `custom/` directory, create commits as desired, and use the robot's `save` command to push these changes
 1. Send an administrator `update` command to your production robot to pull down the latest changes and reload
