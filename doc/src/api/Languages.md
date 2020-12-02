@@ -128,7 +128,7 @@ by using the `-c <configpath>` option:
 2018/04/13 18:07:52 Starting up with config dir: cfg/term/, and install dir: /home/user/go/src/github.com/lnxjedi/gopherbot
 2018/04/13 18:07:52 Debug: Loaded installed conf/robot.yaml
 2018/04/13 18:07:52 Debug: Loaded configured conf/robot.yaml
-Terminal connector running; Use '|C<channel>' to change channel, or '|U<user>' to change user
+Terminal connector running; Type '|c?' to list channels, '|u?' to list users
 c:general/u:alice -> |ubob
 Changed current user to: bob
 c:general/u:bob -> ;ping
@@ -169,7 +169,7 @@ You can see an example of plugin debugging here with the terminal connector:
 2018/04/18 15:43:01 Starting up with config dir: /home/user/.gopherbot, and install dir: /home/user/go/src/github.com/lnxjedi/gopherbot
 2018/04/18 15:43:01 Debug: Loaded installed conf/robot.yaml
 2018/04/18 15:43:01 Debug: Loaded configured conf/robot.yaml
-Terminal connector running; Use '|C<channel>' to change channel, or '|U<user>' to change user
+Terminal connector running; Type '|c?' to list channels, '|u?' to list users
 c:general/u:alice -> ;ruby me!
 general: @alice Sorry, that didn't match any commands I know, or may refer to a command that's not available in this channel; try 'floyd, help <keyword>'
 c:general/u:alice -> ;help debug

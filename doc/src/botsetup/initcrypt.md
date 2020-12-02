@@ -4,7 +4,7 @@ Now that you've set the robot's encryption key, you can initialize encryption an
 ```
 davidparsley@penguin:/home/robots/clu$ ./gopherbot 
 2020/03/09 18:29:43 Logging to robot.log; warnings and errors duplicated to stdout
-Terminal connector running; Use '|c<channel|?>' to change channel, or '|u<user|?>' to change user
+Terminal connector running; Type '|c?' to list channels, '|u?' to list users
 general: *******
 general: Welcome to the *Gopherbot* terminal connector. Since no configuration was detected, you're
 connected to 'floyd', the default robot.

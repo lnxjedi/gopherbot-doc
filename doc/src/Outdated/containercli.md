@@ -22,7 +22,7 @@ daemon@af2a1924e1ff:~$ gopherbot
 2020/02/20 19:26:30 Info: Stop called with 1 pipelines running
 2020/02/20 19:26:30 Info: Restarting...
 2020/02/20 19:26:30 Info: Stopping signal handler
-Terminal connector running; Use '|c<channel|?>' to change channel, or '|u<user|?>' to change user
+Terminal connector running; Type '|c?' to list channels, '|u?' to list users
 OUT: GOPHER_PROTOCOL is terminal
 clu-jobs: Starting restore of robot state...
 OUT: Agent pid 440

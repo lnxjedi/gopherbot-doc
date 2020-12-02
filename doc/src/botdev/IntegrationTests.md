@@ -20,7 +20,7 @@ $ make testbot
 CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -mod vendor -tags 'netgo osusergo static_build test' -o gopherbot
 [gopherbot]$ cd test/membrain
 [membrain]$ ../../gopherbot 
-Terminal connector running; Use '|c<channel|?>' to change channel, or '|u<user|?>' to change user
+Terminal connector running; Type '|c?' to list channels, '|u?' to list users
 ...
 ```
 ## Debugging Deadlocks

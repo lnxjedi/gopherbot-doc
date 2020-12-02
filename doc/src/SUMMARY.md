@@ -36,7 +36,7 @@
 
 - [Deploying and Running Your Robot](RunRobot.md)
     - [Running in a Container](deploy/Container.md)
-        - [Docker Examples](deploy/DockerDeploy.md)
+        - [Docker Example](deploy/DockerDeploy.md)
         - [Deploying to Kubernetes](deploy/Kubernetes.md)
     - [Running with Systemd](deploy/systemd.md)
 
@@ -48,20 +48,15 @@
     - [Standard Commands](basics/stdplugins.md)
     - [Context](basics/context.md)
 
-- [Managing and Extending Your Robot](Admin.md)
-    # TODO: move the stuff below from deploy to admin or elsewhere...
-    - [CLI Operation](extensiondev/CLI.md)
-        - [Local Install](extensiondev/local.md)
-        - [Container Operation](extensiondev/containercli.md)
-        - [Encrypting Secrets](extensiondev/secrets.md)
+- [Managing Your Robot and Adding Extensions](Admin.md)
     - [Updating from Git](usage/update.md)
-    - [Using the Terminal Connector](usage/terminal.md)
+    - [Container Dev Environment](extensiondev/devenv.md)
+    - [Local Install Dev Environment](extensiondev/local.md)
+    - [CLI Operation](extensiondev/CLI.md)
+        - [Encrypting Secrets](extensiondev/secrets.md)
+    - [Using the Terminal Connector](extensiondev/terminal.md)
     - [Administrator Commands](usage/admin.md)
-    - [Command-Line Use](usage/cli.md)
     - [Logging](usage/logging.md)
-
-- [Developing Extensions for Your Robot](botprogramming.md)
-    - [Dev Environment](extensiondev/devenv.md)
 
 - [Gopherbot Configuration Reference](Configuration.md)
     - [Environment Variables](Environment-Variables.md)

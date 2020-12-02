@@ -55,3 +55,5 @@ That's it - your robot is ready to be deployed and start doing some work. Once y
 $ docker stop clu
 $ docker rm clu
 ```
+
+> Note: After setting up your robot, you may get an e-mail from GitHub about having uploaded an ssh private key. Don't panic! If you download the keys and try to use them with `ssh-add`, you'll find they're encrypted - false alarm. You'll need your robot's `GOPHER_ENCRYPTION_KEY` to decrypt the passphrase.
