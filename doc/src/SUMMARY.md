@@ -58,6 +58,8 @@
     - [Administrator Commands](usage/admin.md)
     - [Logging](usage/logging.md)
 
+- [CI/CD with GopherCI](GopherCI.md)
+
 - [Gopherbot Configuration Reference](Configuration.md)
     - [Environment Variables](Environment-Variables.md)
     - [Configuration File Loading](config/file.md)
