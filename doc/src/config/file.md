@@ -2,9 +2,9 @@
 
 **Gopherbot** uses **YAML** for it's configuration files, and Go text templates for expanding the files it reads. Any time **Gopherbot** loads a configuration file, say `conf/robot.yaml`, it first looks for the file in the installation directory, and loads and expands that file if found. Next it looks for the same file in the custom configuration directory; if found, it loads and expands that file, then recursively merges the two data structures:
 * Map values merge and override
-* Array values are replaced
+* Array values are replaced or appended
 
-To illustrate with an example, take the following two excerpts from `robot.yaml`:
+To illustrate with an example, take the following two hypothetical excerpts from `terminal.yaml`:
 
 Default from the install archive:
 ```yaml
@@ -14,6 +14,9 @@ ProtocolConfig:
   - random
   - general
   StartUser: alice
+UserRoster:
+- UserName: "alice"
+  UserID: "u0001"
 ```
 
 Custom local configuration:
@@ -23,6 +26,9 @@ ProtocolConfig:
   Channels:
   - jobs
   - general
+AppendUserRoster:
+- UserName: "bob"
+  UserID: "u0002"
 ```
 
 The resulting configuration would be:
@@ -33,6 +39,11 @@ ProtocolConfig:
   - jobs
   - general
   StartUser: alice
+UserRoster:
+- UserName: "alice"
+  UserID: "u0001"
+- UserName: "bob"
+  UserID: "u0002"
 ```
 
 ## Template Expansion

@@ -17,4 +17,4 @@ OUT: echo Agent pid 11337 killed;
 c:general/u:alice ->
 ```
 
-Once you're robot has bootstrapped to the directory and created the `custom/` subdirectory, you can press `<ctrl-d>` to exit the robot, or open another terminal window in the same directory to use **Gopherbot's** CLI commands, discussed in the next section.
+Once you're robot has bootstrapped to the directory and created the `custom/` subdirectory, you can press `<ctrl-d>` to exit the robot, or open another terminal window in the same directory to use **Gopherbot's** CLI commands, discussed in the next section. When you're finished, it's good practice to remove all but the `.env` file and `gopherbot` symlink, to avoid working with a stale repository.
