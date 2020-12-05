@@ -8,8 +8,16 @@
 
 {{#include tasks/pause-brain.md}}
 
+{{#include tasks/pause.md}}
+
 {{#include tasks/restart-robot.md}}
 
 {{#include tasks/resume-brain.md}}
 
+{{#include tasks/robot-quit.md}}
+
 {{#include tasks/rotate-log.md}}
+
+{{#include tasks/send-message.md}}
+
+{{#include tasks/tail-log.md}}
