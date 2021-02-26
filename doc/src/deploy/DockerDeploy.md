@@ -26,3 +26,5 @@ Info: Initializing plugin: citools
 Info: Initializing plugin: ssh-admin
 Info: Robot is initialized and running
 ```
+
+> Note: when running on Linux, you could use `podman` in place of `docker`.
