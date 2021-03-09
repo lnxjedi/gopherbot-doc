@@ -1,2 +1,2 @@
 #!/bin/bash
-mdbook serve
+mdbook serve -p 8888
