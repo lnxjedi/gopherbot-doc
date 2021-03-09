@@ -2,6 +2,8 @@
 
 [Title](Title.md)
 
+[Status](Status.md)
+
 [Foreword](Foreword.md)
 
 [Introduction](Introduction.md)
@@ -102,3 +104,4 @@
     - [Integration Tests](botdev/IntegrationTests.md)
     - [Important Structs and Interfaces](botdev/StructsInterfaces.md)
     - [Protocols](botdev/protocols.md)
+    - [Releases](botdev/releases.md)

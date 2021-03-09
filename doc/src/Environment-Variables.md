@@ -6,10 +6,9 @@
 
 Certain environment variables can be supplied to the running **Gopherbot** process to configure and/or bootstrap your robot. These environment variables can be set by:
 
-* `systemd` - Not recommded; while systemd can provide environment variables to your robot, it's insecure and will allow local users on the system to view the values
-* `$GOPHER_HOME/private/environment` - a slightly better option, normally used for devel robots with `fetch-robot.sh`, where `private` is a private repository with the single file `environment`
-* `docker` or `docker-compose` - these and other container environments provide more secure means of providing environment variables to containers
-* `$GOPHER_HOME/.env` - the most secure means is by creating a `.env` in `$GOPHER_HOME`, outside of any git repository, mode `0600`
+* `systemd` - Not recommended; while systemd can provide environment variables to your robot, it's very insecure and will allow local users on the system to view the values
+* `docker`, `docker-compose` or [Kubernetes](https://kubernetes.io) - these and other container environments provide more secure means of providing environment variables to containers
+* `$GOPHER_HOME/.env` - the most secure means of providing environment variables to your robot is creating a `.env` file in `$GOPHER_HOME`, outside of any git repository, mode `0600`
 
 The last two options are recommended for production deployments of a **Gopherbot** robot.
 

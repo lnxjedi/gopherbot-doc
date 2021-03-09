@@ -7,8 +7,9 @@ The most straight-forward and widely available way to set up a development envir
 
 **2.** From this directory, run the `gopherbot-dev` container, this time supplying the robot's environment. Using "clu" as an example:
 ```
-$ docker run -p 127.0.0.1:3000:3000 --name clu-dev -it --rm --env-file environment quay.io/lnxjedi/gopherbot-dev:latest
+$ docker run -p 127.0.0.1:3000:3000 --name clu-dev --rm --env-file environment quay.io/lnxjedi/gopherbot-dev:latest
 ```
+> Note that you can also find a generic `run-robot.sh` script to use for this in [github.com/lnxjedi/gopherbot/resources/containers/dev](https://github.com/lnxjedi/gopherbot/blob/main/resources/containers/dev/run-robot.sh).
 
 **3.** Now open your browser and connect to [http://127.0.0.1:3000](http://127.0.0.1:3000), where you'll be presented with the [Theia](https://github.com/eclipse-theia/theia) interface.
 
