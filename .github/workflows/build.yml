@@ -39,6 +39,7 @@ jobs:
         with:
           author_name: "David Parsley"
           author_email: "parsley@linuxjedi.org"
+          repository: lnxjedi/gopherbot
           branch: "gh-pages"
           directory: gopherbot-doc
           github_token: ${{ secrets.REPO_PUSH_TOKEN }}
