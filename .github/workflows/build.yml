@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: lnxjedi/gopherbot
+          persist-credentials: false
           fetch-depth: 0
           path: gopherbot-doc
           ref: gh-pages
