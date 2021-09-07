@@ -33,13 +33,14 @@ jobs:
           mdbook build -d ../gopherbot-doc ./doc
           mv ghpages.git gopherbot-doc/.git
 
-      - name: Commit & Push changes
-        # actions-js/push v1.3
-        uses: actions-js/push@a52398fac807b0c1e5f1492c969b477c8560a0ba
-        with:
-          author_name: "David Parsley"
-          author_email: "parsley@linuxjedi.org"
-          repository: lnxjedi/gopherbot
-          branch: "gh-pages"
-          directory: gopherbot-doc
-          github_token: ${{ secrets.REPO_PUSH_TOKEN }}
+      - name: Commit and push
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_PUSH_TOKEN }}
+        run: |
+          cd gopherbot-doc
+          git config --local user.email "parsley@linuxjedi.org"
+          git config --local user.name "David Parsley"
+          git add -A
+          git commit -m "Automated update" || exit 0
+          git push https://parsley42:${GITHUB_TOKEN}@github.com/lnxjedi/gopherbot-doc gh-pages
