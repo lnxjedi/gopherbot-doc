@@ -43,4 +43,4 @@ jobs:
           git config --local user.name "David Parsley"
           git add -A
           git commit -m "Automated update" || exit 0
-          git push https://parsley42:${GITHUB_TOKEN}@github.com/lnxjedi/gopherbot-doc gh-pages
+          git push https://parsley42:${GITHUB_TOKEN}@github.com/lnxjedi/gopherbot gh-pages
