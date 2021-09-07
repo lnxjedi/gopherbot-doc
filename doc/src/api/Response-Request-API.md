@@ -9,7 +9,6 @@ Table of Contents
     * [Return Values](#return-values)
   * [Code Examples](#code-examples)
     * [Bash](#bash)
-    * [PowerShell](#powershell)
     * [Python](#python)
     * [Ruby](#ruby)
 
@@ -77,24 +76,6 @@ else
     Say "Oh, come on - you're kidding, right?!?"
   fi
 fi
-```
-
-### PowerShell
-```powershell
-$rep = $bot.PromptForReply("YesNo", "Do you like kittens?")
-if ($rep.Ret -ne "Ok") {
-  $bot.Say("Eh, sorry bub, I'm having trouble hearing you - try typing faster?")
-} else {
-  $reply = [String]$rep
-  switch -Wildcard ($reply) {
-    "y*" { # PS is case-insensitive
-      $bot.Say("No kidding! Me too!")
-    }
-    default {
-      $bot.Say("Oh, come on - you're kidding, right?!?")
-    }
-  }
-}
 ```
 
 ### Python

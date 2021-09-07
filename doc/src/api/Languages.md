@@ -29,7 +29,6 @@ Table of Contents
     * [Starting from a Sample Plugin](#starting-from-a-sample-plugin)
     * [Using Boilerplate Code](#using-boilerplate-code)
       * [Bash Boilerplate](#bash-boilerplate)
-      * [PowerShell Boilerplate](#powershell-boilerplate)
       * [Python Boilerplate](#python-boilerplate)
       * [Ruby Boilerplate](#ruby-boilerplate)
   * [The Plugin API](#the-plugin-api)

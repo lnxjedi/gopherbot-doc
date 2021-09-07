@@ -15,11 +15,6 @@ Besides the logging that Gopherbot does on it's own, plugins can also emit log m
 Log "Error" "The robot broke"
 ```
 
-## PowerShell
-```powershell
-$bot.Log("Error", "The robot broke")
-```
-
 ## Python
 ```python
 bot.Log("Error", "The robot broke")
@@ -39,13 +34,6 @@ Every language has some means of sleeping / pausing, and this method is provided
 Say "Be back soon!"
 Pause 2
 Say "... aaaand I'm back!"
-```
-
-## PowerShell
-```powershell
-$bot.Say("Be back soon!")
-$bot.Pause(2)
-$bot.Say("... aaaand I'm back!")
 ```
 
 ## Python

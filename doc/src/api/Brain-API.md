@@ -75,20 +75,6 @@ if remembered
 end
 ```
 
-### PowerShell
-```powershell
-$memory = $bot.CheckoutDatum("memory", $TRUE)
-if ($memory.exists) {
-  $memory.Datum += "the answer is 42"
-} else {
-  [String[]] $memory.Datum = @( "the answer is 42" )
-}
-$ret = $bot.UpdateDatum($memory)
-if ($ret -ne "Ok") {
-  $bot.Say("I'm having a hard time remembering things")
-}
-```
-
 ## Long-Term Memory Sample Transcript
 
 Using the `terminal` connector, you can see the `remember` function in action:
@@ -179,14 +165,6 @@ bot.Remember(key, value)
 ```
 ```ruby
 mem = bot.Recall(key)
-```
-
-### PowerShell
-```powershell
-$bot.Remember($key, $value)
-```
-```powershell
-$mem = $bot.Recall($key)
 ```
 
 ## Short-Term Memory Sample Transcript

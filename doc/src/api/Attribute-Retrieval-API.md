@@ -34,17 +34,6 @@ else
 fi
 ```
 
-## PowerShell
-```powershell
-$attr = $bot.GetBotAttribute("email")
-if ( $attr.Ret -eq "Ok" ) {
-  $email = $attr.Attr
-  $bot.Say("My email address is: $email")
-} else {
-  $bot.Say("I don't think I have an email address")
-}
-```
-
 ## Python
 ```python
 # In some cases you might forego error checking

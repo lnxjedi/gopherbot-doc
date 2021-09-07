@@ -6,7 +6,6 @@ Table of Contents
   * [SendUserMessage, SendChannelMessage and SendUserChannelMessage](#sendusermessage-sendchannelmessage-and-senduserchannelmessage)
   * [Code Examples](#code-examples)
     * [Bash](#bash)
-    * [PowerShell](#powershell)
     * [Python](#python)
     * [Ruby](#ruby)
 
@@ -42,15 +41,6 @@ if [ $RETVAL -ne $GBRET_Ok ]
 then
   Log "Error" "Unable to message Bob in #general - return code $RETVAL"
 fi
-```
-
-## PowerShell
-```powershell
-$bot.Say("I'm sending a message to Bob in #general")
-$retval = $bot.SendUserChannelMessage("bob", "general", "Hi, Bob!")
-if ( $retval -ne "Ok" ) {
-  $bot.Log("Error", "Unable to message Bob in #general - return code $retval")
-}
 ```
 
 ## Python
