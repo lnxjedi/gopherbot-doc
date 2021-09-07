@@ -20,16 +20,13 @@ AddTask "echo" "hello, world"
 
 ### Python
 ```python
+ret = bot.AddTask("echo", ["hello", "world"])
 ```
 
 ### Ruby
 
 ```ruby
-```
 
-### PowerShell
-```powershell
-$ret = $bot.AddTask("echo", @("hello", "world"))
 ```
 
 ## SetParameter

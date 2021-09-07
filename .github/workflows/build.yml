@@ -1,0 +1,43 @@
+name: Gopherbot Docs
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Checkout gopherbot/gh-pages
+        uses: actions/checkout@v2
+        with:
+          repository: lnxjedi/gopherbot
+          path: gopherbot-doc
+          ref: gh-pages
+
+      - name: Setup mdBook
+        # peaceris/actions-mdbook v1.1.14
+        uses: peaceiris/actions-mdbook@4b5ef36b314c2599664ca107bb8c02412548d79d
+        with:
+          mdbook-version: 'latest'
+
+      - name: Build
+        run: |
+          mv gopherbot-doc/.git ghpages.git
+          mdbook build -d ../gopherbot-doc ./doc
+          mv ghpages.git gopherbot-doc/.git
+
+      - name: Commit & Push changes
+        # actions-js/push v1.3
+        uses: actions-js/push@a52398fac807b0c1e5f1492c969b477c8560a0ba
+        with:
+          author_name: "David Parsley"
+          author_email: "parsley@linuxjedi.org"
+          branch: "gh-pages"
+          directory: gopherbot-doc
+          github_token: ${{ secrets.REPO_PUSH_TOKEN }}
