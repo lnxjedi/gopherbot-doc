@@ -19,6 +19,12 @@ Table of Contents
 Long-term memories are scoped per-plugin by key, and so the data is not shareable between plugins. Short-term memories are stored
 for each user/channel combination, and can be freely shared between plugins.
 
+## Sharing Memories
+For multiple jobs and/or plugins to share the same memory namespace, create an entry in the robot's `NameSpaces:`, and set the `NameSpace:` for each job or plugin.
+
+## Simple Task Memory NameSpace
+By default, simple tasks in a job or plugin pipeline inherit the NameSpace from the pipeline, allowing memory-using tasks to be re-used. If a particular task needs to use the same memories for different plugins and jobs, create a unique entry for the task in the robot's `NameSpaces:`, and set that task's `NameSpace:` accordingly.
+
 # Long-Term Memories
 The following methods are available for manipulating long-term memories:
 * `CheckoutDatum(key, RWflag)` - returns a complex data item (memory) with a short-term exclusive lock on the datum if RW is `true`
