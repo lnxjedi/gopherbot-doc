@@ -58,6 +58,8 @@ For the optional `state` and `private` repositories, the included jobs will use 
 
 In addition to the above passed-through environment vars, **Gopherbot** supplies the following environment variables to external scripts:
 * `GOPHER_INSTALLDIR` - absolute path to the gopherbot install, normally `/opt/gopherbot`
+* `RUBYLIB` - path for Ruby `require 'gopherbot_v1'`, normally `/opt/gopherbot/lib`
+* `PYTHONPATH` - path for Python `import`, normally `/opt/gopherbot/lib`
 
 ## Automatic Environment Variables
 
