@@ -21,12 +21,29 @@ AddTask "echo" "hello, world"
 ### Python
 ```python
 ret = bot.AddTask("echo", ["hello", "world"])
+bot.AddTask("robot-quit", [])
 ```
 
 ### Ruby
 
 ```ruby
-
+ret = bot.AddTask("echo", ["hello", "world"])
+bot.AddTask("robot-quit", [])
 ```
 
 ## SetParameter
+
+### Bash
+```bash
+SetParameter "PING_LATENCY" "45ms"
+```
+
+### Python
+```python
+bot.SetParameter("PING_LATENCY", "45ms")
+```
+
+### Ruby
+```ruby
+bot.SetParameter("PING_LATENCY", "45ms")
+```

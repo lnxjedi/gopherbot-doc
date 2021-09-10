@@ -22,8 +22,11 @@ bot.Log("Error", "The robot broke")
 
 ## Ruby
 ```ruby
+bot.Log(:error, "The robot broke")
+# or
 bot.Log("Error", "The robot broke")
 ```
+> Symbols look better and work just fine.
 
 # Pause Method
 
