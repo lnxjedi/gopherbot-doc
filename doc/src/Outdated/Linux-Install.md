@@ -29,7 +29,7 @@ As `root`:
     [root@myhost gopherbot]# cp -a conf/ brain/ /usr/local/etc/gopherbot/
     [root@myhost gopherbot]# chown -R robot:robot /usr/local/etc/gopherbot/brain/
     ```
-6. If you haven't already, get a Slack token for your robot from https://\<your-team\>.slack.com/services/new/bot
+6. If you haven't already, get a Slack token for your robot from https://\<your-team\>.slack.com/apps/A0F7XDU93-hubot
 7. Edit `/opt/gopherbot/conf/gopherbot.yaml`, uncommenting and/or modifying:
   * `AdminContact`
   * `DefaultChannels`

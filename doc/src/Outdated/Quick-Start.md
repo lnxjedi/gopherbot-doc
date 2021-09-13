@@ -9,7 +9,7 @@ sample files distributed with Gopherbot, removing the single `#` to uncomment li
 1. Download the latest **Gopherbot** for your platform at https://github.com/lnxjedi/gopherbot/releases/latest
 2. Unzip the install archive to e.g. `<home directory>/gopherbot`
 1. Copy `conf/gopherbot.yaml.sample` to `conf/gopherbot.yaml`
-1. Obtain a 'bot token from https://\<your-team\>.slack.com/services/new/bot
+1. Obtain a 'bot token from https://\<your-team\>.slack.com/apps/A0F7XDU93-hubot
 1. Edit `gopherbot.yaml`, uncommenting and updating yaml lines for at least `AdminUsers`, `DefaultChannels` (listing `general`, `random` and other channels), and `Protocol` configuration
 1. From the install directory, run `./gopherbot` or `./gopherbot.exe`
    * `gopherbot(.exe) -h` will give you a list of command-line options
