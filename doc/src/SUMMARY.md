@@ -10,6 +10,8 @@
 
 [Terminology](Terminology.md)
 
+# Part I - Setting Up and Using Your Own Robot
+
 - [Settting Up a Gopherbot Robot](Installation.md)
     - [Gopherbot Requirements](install/Requirements.md)
     - [Manual Installation](install/ManualInstall.md)
@@ -62,6 +64,8 @@
 
 - [CI/CD with GopherCI](GopherCI.md)
 
+# Part II - Reference
+
 - [Gopherbot Configuration Reference](Configuration.md)
     - [Environment Variables](Environment-Variables.md)
     - [Configuration File Loading](config/file.md)
@@ -89,7 +93,7 @@
 
 - [Module Support](Modules.md)
 
-## Appendix
+# Appendices
 - [Appendix](appendices/Appendix.md)
     - [A - Protocols](appendices/Protocols.md)
         - [A.1 - Slack](appendices/slack.md)
@@ -98,7 +102,7 @@
         - [A.4 - Test](appendices/testproto.md)
         - [A.5 - Nullconn](appendices/nullconn.md)
 
-## Gopherbot Development
+# Contributing to Gopherbot Development
 - [Working on Gopherbot](GopherDev.md)
     - [Development Robot](botdev/DevelRobot.md) <!--TODO: write me! -->
     - [Integration Tests](botdev/IntegrationTests.md)

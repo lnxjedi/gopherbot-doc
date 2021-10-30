@@ -11,5 +11,5 @@ Since **Gopherbot** is primarily a *Go* daemon that utilizes external tools and 
 * `python` - (version 3) next to `bash`, the second most common language for extensions is **python** version 3, which includes several management jobs
 
 **Optional**
-* `ruby` - ruby isn't heavily used with the default extensions, but is a supported language and included in the pre-built containers
-* `go` - the pre-built containers all include a recent version of *Go*, which can be used for e.g. building loadable modules for *Go* plugins, jobs and tasks
+* `ruby` - Ruby isn't heavily used with the default extensions, but is a supported language and included in the pre-built containers
+* `go` - While Gopherbot is written in *Go*, writing plugins in Go is considered an advanced topic and not well covered in this manual
