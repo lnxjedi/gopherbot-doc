@@ -1,5 +1,7 @@
 # Requirements
 
+> Up-to-date with v2.4
+
 Since **Gopherbot** is primarily a *Go* daemon that utilizes external tools and scripts to perform most of the real work, you'll probably want to have most of the (common) listed dependencies. Note that if you deploy your robot in a container, most of these are included in the base container, which you can further customize by adding your own tools. ([Data](https://github.com/parsley42/data-gopherbot/blob/master/Containerfile) is the best example of this.)
 
 * `git` - with version 2, **Gopherbot** is tightly integrated with git for updating configuration and keeping state; **Gopherbot** requires fairly recent versions of *git* supporting `git remote get-url ...`

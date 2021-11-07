@@ -1,6 +1,8 @@
 # Robot Directory Structure
 
-**Gopherbot** robots run in the context of a standard directory structure. The root of this directory structure is the `$GOPHER_HOME` for a given robot, and your robot starts by running the *gopherbot* binary in this directory. This section documents a standard directory structure; though it's possible to modify your particular configuration for different directories, only the standard structure is documented. There are no requirements on this directory except that it needs to be owned and writable by the UID running the *gopherbot* binary; it should not be located under `/opt/gopherbot`, to avoid complicating upgrades. The [stock containers](https://quay.io/organization/lnxjedi) create a `robot` user and home directory in `/home/robot`, but the software was written to e.g. pass `-c <filename>` to `ssh` to allow multiple robots to run on a single system without home directories. In this kind of setup, I normally keep them in `/var/lib/robots/<robotname>`. You can always give your robot the `info` command to report on where it's running, and in what directory (`$GOPHER_HOME`):
+> Up-to-date with v2.4
+
+**Gopherbot** robots run in the context of a standard directory structure. The root of this directory structure is the `$HOME` for a given robot, and your robot starts by running the *gopherbot* binary in this directory. There are no requirements on this directory except that it needs to be owned and writable by the UID running the *gopherbot* binary; it should not be located under `/opt/gopherbot`, to avoid complicating upgrades. The [stock containers](https://quay.io/organization/lnxjedi) create a `robot` user and home directory in `/var/lib/robot`, but the software was written to e.g. pass `-c <filename>` to `ssh` to allow multiple robots to run on a single system without _real_ system users and home directories. In this kind of setup, the standard location is `/var/lib/robots/<robotname>`. You can always give your robot the `info` command to report on where it's running, and in what directory (`$GOPHER_HOME`):
 ```
 parsley - 10:02 AM:
 *info
@@ -38,11 +40,10 @@ The `custom/` directory is essentially *your robot*, and is generally used diffe
 ### During Development
 
 When developing jobs, tasks and plugins for your robot, you'll mostly use the terminal connector and treat `state/` as disposable. A fairly standard workflow goes like this:
-1. Run your robot with the [gopherbot-dev](https://quay.io/repository/lnxjedi/gopherbot-dev?tab=info) container, providing an environment file for your robot
+1. Run your robot with the `gb-start-dev` script, which uses the [gopherbot-theia](https://quay.io/repository/lnxjedi/gopherbot-theia?tab=info) container, providing an environment file for your robot
 1. Use the **terminal** connector, configured to mirror your team chat environment, for developing extensions for your robot
-1. In the `custom/` directory, create commits as desired, and use the robot's `save` command to push these changes
+1. In the `custom/` directory, create commits as desired, creating and pushing commits as normal
 1. Send an administrator `update` command to your production robot to pull down the latest changes and reload
-1. Remove this temporary container until the next time you work on the robot
 
 For more information on developing, see the chapter on [Developing Extensions](../botprogramming.md).
 

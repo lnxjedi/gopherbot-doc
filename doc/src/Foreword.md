@@ -1,3 +1,5 @@
+# Foreword
+
 My work with ChatOps began with Hubot around 2012 when I was working as an systems engineer for a small hosting provider. The owner had sent me a link to Hubot, asking me to have a look. I took to the concept immediately, and started automating all kinds of tasks that our support team could easily access from our team chat. Soon they were using our robot to troubleshoot email routing and DNS issues, migrate mailboxes, and build new cPanel server instances.
 
 Not being a very talented (or motivated) Javascript/NodeJS programmer, my Hubot commands invariably followed the same pattern: write it in Javascript if it was _trivially_ easy  to do so, otherwise shell out to bash and return the results. This was productive and gave results, but it was ugly and limited in functionality.

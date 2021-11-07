@@ -1,5 +1,7 @@
 # Terminology
 
+> Up-to-date with v2.4
+
 This section is most important for referring back to as you read the documentation, to disambiguate terms.
 
 (It's also for the author, to help maintain some consistency)

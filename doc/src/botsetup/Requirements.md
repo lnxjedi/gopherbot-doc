@@ -1,8 +1,12 @@
 # Robot Requirements
 
+> Up-to-date with v2.4; Nov. '21
+
 To set up your robot you'll need:
 * Access to a Linux host with the **Gopherbot** software installed, or an environment where you can run and interact with the [official Gopherbot container image](https://quay.io/repository/lnxjedi/gopherbot-dev?tab=info)
-* Credentials your robot can use to log in to your team chat; you can obtain a **Gopherbot**-compatible [Slack](https://slack.com) token here: https://\<your-team\>.slack.com/apps/A0F7XDU93-hubot
+* Slack credentials your robot can use to log in to your team chat; since **Gopherbot** uses credentials compatible with [Hubot](https://hubot.github.com/), the best guide for this is the [Slack Developer Kit for Hubot](https://slack.dev/hubot-slack/)
+   * Note that if you follow the procedure to create a *Classic Slack App*, you'll only need the **bot OAuth token** generated when you add the app to your workspace
+   * You can also simply use the [Hubot Integration](https://my.slack.com/apps/A0F7XDU93-hubot)
 * The name of a channel where your robot will run jobs by default, e.g. `clu-jobs` or `data-jobs`
 * A completely empty (no README, LICENSE, etc.) public or private *git* repository, to store your robot; a common naming convention is *botname*-gopherbot. For example, you can find **Clu** at [https://github.com/parsley42/clu-gopherbot](https://github.com/parsley42/clu-gopherbot)
 * If you're using a container and/or the **autosetup plugin**, you'll need to be able to configure read/write and read-only deploy keys for the robot's repository - this is widely supported with almost all of the major *git* hosting services and applications, check your repository settings or consult the documentation for your particular service (the Github documentation can be found [here](https://docs.github.com/en/free-pro-team@latest/developers/overview/managing-deploy-keys#deploy-keys))
@@ -36,7 +40,9 @@ Git services also allow you to add multiple ssh keys to an individual user. It's
 **Gopherbot** supports the notion of long-term memories, which are technically just key-blob stores. The included `lists` and `links` plugins both use long-term memory storage.
 
 ### File backed brains
-The standard configuration for a new robot uses the file-backed brain, with memories stored in `$GOPHER_HOME/state/brain`. You can schedule the included `backup` job to run periodically, and by default your robot will commit new memories as they're updated to a separate `robot-state` branch of it's configuration repository. If you want to store state in a separate repository, you can configure the `GOPHER_STATE_REPOSITORY` and optionally `GOPHER_STATE_BRANCH` for the included `backup` and `restore` jobs.
+The standard configuration for a new robot uses the file-backed brain that's backed up to a `robot-state` branch in the robot's *git* repository, with memories stored in `$GOPHER_HOME/state/brain`. This brain works reasonably well for most robots, however:
+* If you write an extension that updates memories frequently, consider using memories with a `_` prefix - this will automatically exclude the memory from being backed up to *git* (and thus spamming the robot's repository)
+* If you need frequently-changing memories that are backed up, you should switch to the [dynamo](#dynamodb-brains) brain
 
 ### DynamoDB brains
 As of this writing, the [AWS](https://aws.amazon.com/) free tier provides a very generous 25GB of free DynamoDB storage - far more than any reasonable robot should use. See the section on [configuring the DynamoDB brain](TODO).

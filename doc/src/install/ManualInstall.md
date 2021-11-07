@@ -1,5 +1,7 @@
 # Installing the **Gopherbot** Software Archive
 
+> Up-to-date with v2.4
+
 > NOTE: The Gopherbot binary is currently Linux-only. Earlier versions ran on MacOS - and even Windows - but these platforms have fallen out of use. Patches are welcome if you'd like to maintain one of these platforms, and I'd be happy to provide advice and assistance. If you have a Mac with Docker installed, you can still use the `gb-*` bash scripts for setting up and running a container-based robot on your Mac.
 
 If you want to run **Gopherbot** directly on a Linux host / VM, you can [download a release](https://github.com/lnxjedi/gopherbot/releases).
