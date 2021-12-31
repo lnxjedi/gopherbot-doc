@@ -175,6 +175,7 @@ The minimum policy required for your robot to use e.g. the `MyBot` table is:
             "Action": [
                 "dynamodb:PutItem",
                 "dynamodb:DescribeTable",
+                "dynamodb:Scan",
                 "dynamodb:GetItem"
             ],
             "Resource": "arn:aws:dynamodb:*:*:table/MyBot"
