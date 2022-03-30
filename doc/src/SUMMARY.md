@@ -52,7 +52,7 @@
     - [Standard Commands](basics/stdplugins.md)
     - [Context](basics/context.md)
 
-- [Managing Your Robot and Adding Extensions](Admin.md)
+- [Managing Your Robot](Admin.md)
     - [Updating from Git](usage/update.md)
     - [Container Dev Environment](extensiondev/devenv.md)
     - [Local Install Dev Environment](extensiondev/local.md)
@@ -61,6 +61,10 @@
     - [Using the Terminal Connector](extensiondev/terminal.md)
     - [Administrator Commands](usage/admin.md)
     - [Logging](usage/logging.md)
+
+- [Writing Custom Extensions for Your Robot](customizing.md)
+    - [Style Guide](customizing/style.md)
+        - [Help for Invalid Command Syntax](customizing/syntax-help.md)
 
 - [CI/CD with GopherCI](GopherCI.md)
 
@@ -91,9 +95,7 @@
     - [Requesting Responses](api/Response-Request-API.md)
     - [Utility](api/Utility-API.md)
 
-- [Module Support](Modules.md)
-
-# Appendices
+## Appendix
 - [Appendix](appendices/Appendix.md)
     - [A - Protocols](appendices/Protocols.md)
         - [A.1 - Slack](appendices/slack.md)
