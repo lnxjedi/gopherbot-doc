@@ -1,4 +1,4 @@
-# Robot Requirements
+# Environment Requirements
 
 > Up-to-date with v2.4; Nov. '21
 
@@ -40,9 +40,8 @@ Git services also allow you to add multiple ssh keys to an individual user. It's
 **Gopherbot** supports the notion of long-term memories, which are technically just key-blob stores. The included `lists` and `links` plugins both use long-term memory storage.
 
 ### File backed brains
-The standard configuration for a new robot uses the file-backed brain that's backed up to a `robot-state` branch in the robot's *git* repository, with memories stored in `$GOPHER_HOME/state/brain`. This brain works reasonably well for most robots, however:
-* If you write an extension that updates memories frequently, consider using memories with a `_` prefix - this will automatically exclude the memory from being backed up to *git* (and thus spamming the robot's repository)
-* If you need frequently-changing memories that are backed up, you should switch to the [dynamo](#dynamodb-brains) brain
+The standard configuration for a new robot uses the file-backed brain that's backed up to a `robot-state` branch in the robot's *git* repository, with memories stored in `$GOPHER_HOME/state/brain`. This brain works reasonably well for most robots.
+> NOTE: If you write an extension that updates memories frequently, consider using memories with a `_` (*ephemeral memory*) prefix - this will automatically exclude the memory from being backed up to *git* (and thus spamming the robot's repository). If your robot has frequently updated memories that require permanent storage, the default git-backed brain probably shouldn't be used.
 
 ### DynamoDB brains
-As of this writing, the [AWS](https://aws.amazon.com/) free tier provides a very generous 25GB of free DynamoDB storage - far more than any reasonable robot should use. See the section on [configuring the DynamoDB brain](TODO).
+If you need frequently-changing memories that are backed up, you should switch to the **dynamo brain**. As of this writing, the [AWS](https://aws.amazon.com/) free tier provides a very generous 25GB of DynamoDB storage - far more than any reasonable robot should use. See the section on [configuring the DynamoDB brain](TODO).

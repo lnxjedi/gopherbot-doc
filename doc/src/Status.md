@@ -1,6 +1,6 @@
 # Status of the Gopherbot Software
 
-The project as a whole is around 5 years old, and the core v1 functionality is fairly robust. On the other hand, some of the original plugins (like duo two factor) have suffered from bit-rot and may not function correctly; good news, though - the "knock knock joke" plugin definitely works.
+The project as a whole is around 6 years old, and the core v1 functionality is fairly robust. On the other hand, some of the original plugins (like duo two factor) have suffered from bit-rot and may not function correctly; good news, though - the "knock knock joke" plugin definitely works.
 
 The new job, task, pipeline and cron functionality for v2 is pretty heavily used and I have a good deal of confidence in it. The CI/CD functionality is, I'm sure, lacking - thus I consider it beta at best. Similarly, the logging functionality and commands are not 100%.
 

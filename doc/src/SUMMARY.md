@@ -10,13 +10,13 @@
 
 [Terminology](Terminology.md)
 
-# Part I - Setting Up and Using Your Own Robot
+# Part I - Robot Setup, Configuration and Administration
 
 - [Settting Up a Gopherbot Robot](Installation.md)
-    - [Gopherbot Requirements](install/Requirements.md)
-    - [Manual Installation](install/ManualInstall.md)
+    - [Software Requirements](install/Requirements.md)
+    - [Installation](install/ManualInstall.md)
     - [Initial Robot Configuration](RobotInstall.md)
-        - [Requirements](botsetup/Requirements.md)
+        - [Environment Requirements](botsetup/Requirements.md)
         - [Robot Directory Structure](botsetup/gopherhome.md)
         - [Quick Start with Autosetup](botsetup/Plugin.md)
         - [Manual Setup](botsetup/ManualSetup.md)
@@ -68,7 +68,7 @@
 
 - [CI/CD with GopherCI](GopherCI.md)
 
-# Part II - Reference
+# Part II - Developing Extensions
 
 - [Gopherbot Configuration Reference](Configuration.md)
     - [Environment Variables](Environment-Variables.md)
@@ -86,7 +86,9 @@
 - [Gopherbot Tool Integrations](pipelines/integrations.md)
     - [Integrating with SSH](pipelines/ssh.md)
 
-- [Gopherbot API](api/API-Introduction.md)
+# Part III - Reference
+
+- [Gopherbot Scripting API](api/API-Introduction.md)
     - [Language Templates](api/Languages.md)
     - [Attribute Retrieval](api/Attribute-Retrieval-API.md)
     - [Brain Methods](api/Brain-API.md)
