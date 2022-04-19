@@ -39,21 +39,18 @@ $ /opt/gopherbot/gb-install-links $HOME/bin
 
 **Files**
 * `gopherbot` - the main executable, both a *daemon* and a *command-line interface*
-* `gb-*` - a developer utility script for retrieving a robot for local development
+* `gb-*` - a small set of developer utility scripts for local development
 
 **Directories**
 * `connectors/` - loadable modules for protocol connectors, e.g. *slack*
-* `goplugins/` - loadable modules for non-default *Go* plugins
-* `brains/` - lodable modules for non-default brain implementations
-* `conf/` - the default configuration, overridden by individual robots
+* `conf/` - the default **yaml** configuration files, merged with / overridden by individual robots
 * `lib/` - API libraries for `bash`, `python` and `ruby`
-* `plugins/` - external script plugins
+* `plugins/` - default external script plugins
 * `plugins/samples` - sample plugins that show API usage but aren't otherwise very useful
-* `tasks/` - a collection of pipeline task scripts
-* `jobs/` - a collection of jobs for robot management (backup/restore) and CI/CD
+* `tasks/` - a collection of default pipeline task scripts
+* `jobs/` - a collection of default jobs for robot management (backup/restore) and CI/CD
 * `helpers/` - helper scripts not directly called by the robot
 * `resources/` - miscellaneous useful bits for a running robot, also the *Containerfiles* used for publishing the stock containers
-* `doc/` - deprecated; contents moved to [gopherbot-doc](https://github.com/lnxjedi/gopherbot-doc)
 * `robot.skel/` - the initial configuration for new robots, analogous to the contents of `/etc/skel`
 * `licenses/` - licenses for other packages used by **Gopherbot**, as required
 

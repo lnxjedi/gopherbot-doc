@@ -45,11 +45,23 @@ The `custom/` directory is essentially *your robot*, and corresponds to your rob
     * `robot.yaml` (mandatory) - primary configuration for your robot, defines all tasks, jobs, plugins, namespaces, parameter sets, and other bits
     * `slack.yaml` - configuration for the slack connector, including encrypted credentials and user mapping
     * `terminal.yaml` - configuration for the terminal connector; normally included users and channel definitions to mirror the contents of `slack.yaml` for use in developing extensions
-    * `jobs` (mandatory) - directory of `<job name>.yaml` files with extended configuration for jobs defined in `robot.yaml`
-    * `plugins` (mandatory) - directory of `<plugin name>.yaml` files with extended configuration for plugins defined in `robot.yaml`
+    * `jobs/` (mandatory) - directory of `<job name>.yaml` files with extended configuration for jobs defined in `robot.yaml`
+    * `plugins/` (mandatory) - directory of `<plugin name>.yaml` files with extended configuration for plugins defined in `robot.yaml`
   * `git/` (mandatory)
     * `config` (mandatory) - contents of your robot's git config defining the name and email used for git operations
-  * `lib/` (standard) - location of script libraries; plugins run with standard environment variables for Ruby and Python so that `import`s and `require`s automatically look here
+  * `jobs/` (conventional) - common location for job scripts, actual path specified in `robot.yaml`
+  * `lib/` (standard) - location of script libraries; jobs and plugins run with standard environment variables for Ruby and Python so that `import` and `require` automatically look here
+  * `plugins/` (conventional) - common location for plugin scripts, actual path specified in `robot.yaml`
+  * `ssh/` (mandatory) - location of robot's ssh configuration files
+    * `config` (optional) - any robot-specific ssh configuration, e.g. host-ip mappings
+    * `deploy_key.pub` (optional) - copy of the public key used for bootstrapping
+    * `manage_key` (optional) - encrypted private key used by the robot to save it's configuration; can be removed after initial configuration
+    * `manage_key.pub` (optional) - public key used as a read-write deploy key, allowing the private key to store the robot's initial configuration in git; can be removed
+    * `robot_key` (optional, default) - the robot's "personal" encrypted ssh key for other ssh / git operations
+    * `robot_key.pub` (optional, default) - the robot's public key corresponding to `robot_key`; the robot will respond to `show pubkey` (or just `pubkey`) with the contents of this file
+  * `tasks/` (conventional) - common location for simple task scripts, actual path specified in `robot.yaml`
+
+> Note that many of these directories are also under `/opt/gopherbot`, and make up the configuration of the default (or base) robot.
 
 ### During Development
 
