@@ -24,18 +24,32 @@ Note that in the standard directory structure, much of the content is automatica
 We'll use [Clu](https://github.com/parsley42/clu-gopherbot) as example:
 
 * `clu/` - Top-level directory, `$GOPHER_HOME`; mostly empty of files and not containing a git repository (`.git/`)
-    * `.env` (user provided) - file containing environment variables for the robot, including it's encryption key and git clone url; on start-up the permissions will be forced to `0600`, or start-up will fail - note that this file may be absent in containers, where the initial environment variables are provided by the container engine
+    * `.env` (optional, user provided) - file containing environment variables for the robot, including it's encryption key and git clone url; on start-up the permissions will be forced to `0600`, or start-up will fail - note that this file may be absent in containers, where the initial environment variables are provided by the container engine
     * `gopherbot` (optional/generated) - convenience symlink to `/opt/gopherbot/gopherbot`
     * `known_hosts` (generated) - used by the robot to record the hosts it connects to over *ssh*
     * `robot.log` (generated) - log file created when the robot is run in **terminal mode**
-    * `custom/` - directory for your robot's git repository, containing custom configuration, plugins, jobs and tasks; for *Clu*, this is [https://github.com/parsley42/clu-gopherbot](https://github.com/parsley42/clu-gopherbot)
-    * `state/` - for the standard file-backed brain, **state/** contains the robot's encrypted memories in a **state/brain/** directory; this directory is normally linked to the `robot-state` branch of the robot's configuration repository - for *Clu* this is [https://github.com/parsley42/clu-gopherbot/tree/robot-state](https://github.com/parsley42/clu-gopherbot/tree/robot-state)
-    * `history/` - the standard robot keeps job / plugin logs here
-    * `workspace/` - default location for the robot's workspace, where repositories are cloned, etc.
+    * `custom/` (bootstrapped) - git repository for your robot, containing custom configuration, plugins, jobs and tasks; this is populated during initial robot setup, or cloned during bootstrapping - for *Clu*, this is [https://github.com/parsley42/clu-gopherbot](https://github.com/parsley42/clu-gopherbot)
+    * `state/` (bootstrapped) - for the standard file-backed brain, **state/** contains the robot's encrypted memories in a **state/brain/** directory; this directory is normally linked to the `robot-state` branch of the robot's configuration repository - for *Clu* this is [https://github.com/parsley42/clu-gopherbot/tree/robot-state](https://github.com/parsley42/clu-gopherbot/tree/robot-state)
+    * `history/` (generated) - the standard robot keeps job / plugin logs here
+    * `workspace/` (generated) - default location for the robot's workspace, where repositories are cloned, etc.
+
+Where:
+  * `generated` items are created by the **gopherbot** binary when a robot first starts
+  * `bootstrapped` items are cloned from git during initial bootstrapping of a robot
 
 ## The `custom/` directory
 
-The `custom/` directory is essentially *your robot*, and is generally used differently for development and deployment.
+The `custom/` directory is essentially *your robot*, and corresponds to your robot's git repository. There's a good deal of flexibility in how the robot's custom directory is layed out, but there a few standardized locations:
+* `custom/` - Top-level directory for your robot's git repository
+  * `conf` (mandatory) - location of robot's **yaml** configuration files
+    * `robot.yaml` (mandatory) - primary configuration for your robot, defines all tasks, jobs, plugins, namespaces, parameter sets, and other bits
+    * `slack.yaml` - configuration for the slack connector, including encrypted credentials and user mapping
+    * `terminal.yaml` - configuration for the terminal connector; normally included users and channel definitions to mirror the contents of `slack.yaml` for use in developing extensions
+    * `jobs` (mandatory) - directory of `<job name>.yaml` files with extended configuration for jobs defined in `robot.yaml`
+    * `plugins` (mandatory) - directory of `<plugin name>.yaml` files with extended configuration for plugins defined in `robot.yaml`
+  * `git/` (mandatory)
+    * `config` (mandatory) - contents of your robot's git config defining the name and email used for git operations
+  * `lib/` (standard) - location of script libraries; plugins run with standard environment variables for Ruby and Python so that `import`s and `require`s automatically look here
 
 ### During Development
 
