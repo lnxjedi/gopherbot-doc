@@ -12,7 +12,7 @@
 
 # Part I - Robot Setup, Configuration and Administration
 
-- [Settting Up a Gopherbot Robot](Installation.md)
+- [Setting Up a Gopherbot Robot](Installation.md)
     - [Software Requirements](install/Requirements.md)
     - [Installation](install/ManualInstall.md)
     - [Initial Robot Configuration](RobotInstall.md)
@@ -29,14 +29,6 @@
             - [Connect Robot to Team](botsetup/connect.md)
             - [Saving Your Robot to Git](botsetup/saverobot.md)
             - [Finished](botsetup/finished.md)
-
-- [Upgrading from Version 1](Upgrading.md)
-    - [Required Bot Info](upgrade/BotInfo.md)
-    - [External Plugin Configuration](upgrade/External-Plugin.md)
-    - [Custom Configuration Directory](upgrade/Custom-Dir.md)
-    - [Main Configuration File Rename](upgrade/robot-yaml.md)
-    - [Early Encryption Initialization](upgrade/Encryption.md)
-    - [Long-Term Memories](upgrade/Memories.md)
 
 - [Deploying and Running Your Robot](RunRobot.md)
     - [Running in a Container](deploy/Container.md)
@@ -62,13 +54,13 @@
     - [Administrator Commands](usage/admin.md)
     - [Logging](usage/logging.md)
 
+# Part II - Developing Extensions
+
 - [Writing Custom Extensions for Your Robot](customizing.md)
     - [Style Guide](customizing/style.md)
         - [Help for Invalid Command Syntax](customizing/syntax-help.md)
 
-- [CI/CD with GopherCI](GopherCI.md)
-
-# Part II - Developing Extensions
+# Part III - Reference
 
 - [Gopherbot Configuration Reference](Configuration.md)
     - [Environment Variables](Environment-Variables.md)
@@ -85,8 +77,6 @@
 
 - [Gopherbot Tool Integrations](pipelines/integrations.md)
     - [Integrating with SSH](pipelines/ssh.md)
-
-# Part III - Reference
 
 - [Gopherbot Scripting API](api/API-Introduction.md)
     - [Language Templates](api/Languages.md)
