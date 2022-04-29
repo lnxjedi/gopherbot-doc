@@ -31,9 +31,11 @@ The following methods are available for manipulating long-term memories:
 * `CheckinDatum(memory)` - signals the robot to release the lock without updating
 * `UpdateDatum(memory)` - updates the memory and releases the lock
 
+When checking out a memory read-write, the engine grants a short-term lock on the memory lasting 1-2 seconds. For tasks where the time between checkout and update could be longer than one second, you should check the return value on `UpdateDatum` - `DatumLockExpired` indicates another waiting task took the lock. It's worth noting that for low-contention memories, a given task can keep the memory checked out indefinitely and still update successfully; the 1-2 seconds is guaranteed, but the lock isn't actually lost unless another task checks out the memory read-write. This also means that a read-only checkout may get an outdated memory.
+
 ## Long-Term Memory Code Examples
 The memory stored can be an arbitrarily complex data item; a hash, array, or combination - anything that can be serialized to/from
-JSON. The example plugins for **Python**, **Ruby** and **PowerShell** all implement a *remember* function that remembers a list (array)
+JSON. The example plugins for **Python** and **Ruby** implement a *remember* function that remembers a list (array)
 of items. For the code examples, we'll start with a memory whose key is `memory`, and has two items defined by this snippet of JSON:
 ```json
 ["the Alamo", "Ferris Bueller"]
