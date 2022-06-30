@@ -4,9 +4,6 @@
 
 To set up your robot you'll need:
 * Access to a Linux host with the **Gopherbot** software installed, or an environment where you can run and interact with the [official Gopherbot container image](https://quay.io/repository/lnxjedi/gopherbot-dev?tab=info)
-* Slack credentials your robot can use to log in to your team chat; since **Gopherbot** uses credentials compatible with [Hubot](https://hubot.github.com/), the best guide for this is the [Slack Developer Kit for Hubot](https://slack.dev/hubot-slack/)
-   * Note that if you follow the procedure to create a *Classic Slack App*, you'll only need the **bot OAuth token** generated when you add the app to your workspace
-   * You can also simply use the [Hubot Integration](https://my.slack.com/apps/A0F7XDU93-hubot)
 * The name of a channel where your robot will run jobs by default, e.g. `clu-jobs` or `data-jobs`
 * A completely empty (no README, LICENSE, etc.) public or private *git* repository, to store your robot; a common naming convention is *botname*-gopherbot. For example, you can find **Clu** at [https://github.com/parsley42/clu-gopherbot](https://github.com/parsley42/clu-gopherbot)
 * If you're using a container and/or the **autosetup plugin**, you'll need to be able to configure read/write and read-only deploy keys for the robot's repository - this is widely supported with almost all of the major *git* hosting services and applications, check your repository settings or consult the documentation for your particular service (the Github documentation can be found [here](https://docs.github.com/en/free-pro-team@latest/developers/overview/managing-deploy-keys#deploy-keys))

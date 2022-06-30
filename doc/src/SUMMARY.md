@@ -15,6 +15,8 @@
 - [Setting Up a Gopherbot Robot](Installation.md)
     - [Software Requirements](install/Requirements.md)
     - [Installation](install/ManualInstall.md)
+    - [Team Chat Credentials](botsetup/credentials.md)
+        - [Slack Socket Mode](botsetup/slacksock.md)
     - [Initial Robot Configuration](RobotInstall.md)
         - [Environment Requirements](botsetup/Requirements.md)
         - [Robot Directory Structure](botsetup/gopherhome.md)
