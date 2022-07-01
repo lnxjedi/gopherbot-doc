@@ -1,6 +1,12 @@
 # Quick Start with Autosetup
 
-The best way to set up a new robot is using the [gopherbot-dev](https://quay.io/repository/lnxjedi/gopherbot-dev?tab=info) container image running in [Docker](https://www.docker.com/) on your workstation. Using **Clu** as an example:
+## Setting up a New Robot on Linux
+
+If you have easy access to a Linux system, the simplest way to set up a new robot is to [install the gopherbot archive](../install/ManualInstall.html), create an empty working directory, create a symlink there to the `/opt/gopherbot/gopherbot` executable, then use the autosetup plugin as described in the docker instructions below (with appropriate and obvious modifications, e.g. running `./gopherbot init slack`).
+
+## Setting up a New Robot with Docker
+
+If you're running a Windows or MacOS system, the best way to set up a new robot is using the [gopherbot-dev](https://quay.io/repository/lnxjedi/gopherbot-dev?tab=info) container image running in [Docker](https://www.docker.com/) on your workstation. Using **Clu** as an example:
 
 **1.** Start a new, empty `gopherbot-dev` container:
 
@@ -10,7 +16,6 @@ root INFO Configuration directory URI: 'file:///home/robot/.theia'
 ...
 root INFO Deploy plugins list took: 441.6 ms
 ```
-> Note: Normally `podman` can be used as a drop-in replacement for `docker`, but on my Fedora 33 workstation, an odd bug is preventing directories from being removed. YMMV, but as of this writing `docker` can be installed from nightly builds, even though it's not in the main repositories.
 
 **2.** Open your browser and browse to `http://127.0.0.1:3000` to view the [Theia](https://github.com/eclipse-theia/theia) interface.
 

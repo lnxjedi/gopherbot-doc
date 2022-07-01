@@ -73,7 +73,7 @@ You should change the display information and display name, and decide if you wa
 1. Once you're logged in, visit the [Slack apps](https://api.slack.com/apps) page, and click **Create New App**
 2. Select **From an app manifest**, choose your workspace, and click **Next**
 3. Paste in the full contents of the app manifest you created and click **Next**
-4. Review the settings, then create your app
+4. Review the settings, then click **Create** to create the Slack app for your robot
 5. Note that the **OAuth** credentials shown aren't the credentials needed for **Gopherbot**
 6. Click **Install to Workspace** and select the workspace where you want to deploy your robot
 
