@@ -6,7 +6,7 @@ If you have easy access to a Linux system, the simplest way to set up a new robo
 
 ## Setting up a New Robot with Docker
 
-If you're running a Windows or MacOS system, the best way to set up a new robot is using the [gopherbot-dev](https://quay.io/repository/lnxjedi/gopherbot-dev?tab=info) container image running in [Docker](https://www.docker.com/) on your workstation. Using **Clu** as an example:
+If you're running a Windows or MacOS system, the best way to set up a new robot is using the [gopherbot-dev](https://github.com/lnxjedi/gopherbot/pkgs/container/gopherbot-dev) container image running in [Docker](https://www.docker.com/) on your workstation. Using **Clu** as an example:
 
 **1.** Start a new, empty `gopherbot-dev` container:
 
