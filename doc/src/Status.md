@@ -8,6 +8,8 @@ I'm a little sorry that the only currently supported team chat connector is **Sl
 
 # Status of this Manual
 
+**December '22 / January '23 - The manual is being actively revised for the new Gopherbot IDE.**
+
 This manual is a work in progress; currently incomplete and partly outdated. This section will be removed when the manual is considered complete. For now, to help you make the most of the manual, this is the current state of the different sections:
 
 ## Front Matter
