@@ -1,26 +1,24 @@
-# Installing the **Gopherbot** Software Archive
+# Installing **Gopherbot** on Linux
 
-> Up-to-date with v2.4
+> Up-to-date with v2.6
 
-> NOTE: The Gopherbot binary is currently Linux-only. Earlier versions ran on MacOS - and even Windows - but these platforms have fallen out of use. Patches are welcome if you'd like to maintain one of these platforms, and I'd be happy to provide advice and assistance. If you have a Mac with Docker installed, you can still use the `gb-*` bash scripts for setting up and running a container-based robot on your Mac.
-
-If you want to run **Gopherbot** directly on a Linux host / VM, you can [download a release](https://github.com/lnxjedi/gopherbot/releases).
+If you want to run **Gopherbot** directly on a Linux host / VM, you can [download a release](https://github.com/lnxjedi/gopherbot/releases) and skip down to [installing the archive](#installing-the-archive).
 
 ## Building from Source
 **Requirements:**
-* A recent (1.14+) version of Go
+* A recent (1.18+) version of Go
 * Standard build utilities; make, tar, gzip
 * A Linux system to build on that matches your target deployment host
 
 **Steps:**
 1. Clone the **Gopherbot** repository: `git clone https://github.com/lnxjedi/gopherbot.git`
-1. `make dist` in the repository root
+1. `make dist` in the repository root; this will compile the binary and create the `gopherbot-linux-amd64.tar.gz` archive
 
 ## Installing the Archive
 1. Extract the downloaded or built archive in `/opt` to create `/opt/gopherbot`, e.g.:
 ```shell
 [root]# cd /opt
-[opt]# tar xzf /path/to/gopherbot/gopherbot-linux-amd64.tar.gz
+[opt]# tar xzvf /path/to/gopherbot/gopherbot-linux-amd64.tar.gz
 ```
 2. (Optional) Also as root, make the `gopherbot` binary **setuid nobody** (see [below](#privilege-separation)):
 ```shell
@@ -30,29 +28,12 @@ If you want to run **Gopherbot** directly on a Linux host / VM, you can [downloa
 
 ## Creating Symlinks to Executables
 
-The `gb-install-links` script will create a set of symlinks to executables. For instance, if `$HOME/bin` is in your `$PATH`, you could:
+The trivial `gb-install-links` script will create a set of symlinks to executables. For instance, if `$HOME/bin` is in your `$PATH`, you could:
 ```shell
 $ /opt/gopherbot/gb-install-links $HOME/bin
 ```
 
-## Archive Contents
-
-**Files**
-* `gopherbot` - the main executable, both a *daemon* and a *command-line interface*
-* `gb-*` - a small set of developer utility scripts for local development
-
-**Directories**
-* `connectors/` - loadable modules for protocol connectors, e.g. *slack*
-* `conf/` - the default **yaml** configuration files, merged with / overridden by individual robots
-* `lib/` - API libraries for `bash`, `python` and `ruby`
-* `plugins/` - default external script plugins
-* `plugins/samples` - sample plugins that show API usage but aren't otherwise very useful
-* `tasks/` - a collection of default pipeline task scripts
-* `jobs/` - a collection of default jobs for robot management (backup/restore) and CI/CD
-* `helpers/` - helper scripts not directly called by the robot
-* `resources/` - miscellaneous useful bits for a running robot, also the *Containerfiles* used for publishing the stock containers
-* `robot.skel/` - the initial configuration for new robots, analogous to the contents of `/etc/skel`
-* `licenses/` - licenses for other packages used by **Gopherbot**, as required
+> See [Appendix A](/appendices/InstallArchive.html) for a description of the contents of the installation archive.
 
 # Privilege Separation
 

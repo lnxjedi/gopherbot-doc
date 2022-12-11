@@ -1,6 +1,6 @@
 # Robot Directory Structure
 
-> Up-to-date with v2.4
+> Up-to-date with v2.6
 
 **Gopherbot** robots run in the context of a standard directory structure. The root of this directory structure is the `$HOME` for a given robot, and your robot starts by running the *gopherbot* binary in this directory. There are no requirements on this directory except that it needs to be owned and writable by the UID running the *gopherbot* binary; it should not be located under `/opt/gopherbot`, to avoid complicating upgrades. The [stock containers](https://github.com/orgs/lnxjedi/packages) create a `bot` user and home directory in `/home/bot`, but the software was written to e.g. pass `-c <filename>` to `ssh` to allow multiple robots to run on a single system without _real_ system users and home directories. In this kind of setup, the standard location is `/var/lib/robots/<robotname>`. You can always give your robot the `info` command to report on where it's running, and in what directory (`$GOPHER_HOME`):
 ```

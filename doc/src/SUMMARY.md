@@ -11,10 +11,12 @@
 [Terminology](Terminology.md)
 
 # Part I - Robot Setup, Configuration and Administration
+- [The Gopherbot IDE](botdev/IDE.md)
 
 - [Setting Up a Gopherbot Robot](Installation.md)
-    - [Software Requirements](install/Requirements.md)
-    - [Installation](install/ManualInstall.md)
+    - [Installation](install/LinuxInstall.md)
+        - [Software Requirements](install/Requirements.md)
+        - [Installing on Linux](install/ManualInstall.md)
     - [Team Chat Credentials](botsetup/credentials.md)
         - [Slack Socket Mode](botsetup/slacksock.md)
     - [Initial Robot Configuration](RobotInstall.md)
@@ -91,12 +93,13 @@
 
 ## Appendix
 - [Appendix](appendices/Appendix.md)
-    - [A - Protocols](appendices/Protocols.md)
-        - [A.1 - Slack](appendices/slack.md)
-        - [A.2 - Rocket.Chat](appendices/rocket.md)
-        - [A.3 - Terminal](appendices/terminal.md)
-        - [A.4 - Test](appendices/testproto.md)
-        - [A.5 - Nullconn](appendices/nullconn.md)
+    - [A - Gopherbot Install Archive](appendices/InstallArchive.md)
+    - [B - Protocols](appendices/Protocols.md)
+        - [B.1 - Slack](appendices/slack.md)
+        - [B.2 - Rocket.Chat](appendices/rocket.md)
+        - [B.3 - Terminal](appendices/terminal.md)
+        - [B.4 - Test](appendices/testproto.md)
+        - [B.5 - Nullconn](appendices/nullconn.md)
 
 # Contributing to Gopherbot Development
 - [Working on Gopherbot](GopherDev.md)

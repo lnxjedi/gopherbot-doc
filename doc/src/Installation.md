@@ -1,5 +1,7 @@
 # Installation
 
+> Up-to-date with v2.6
+
 There are three distinct tasks involved in installing and running a **Gopherbot** robot:
 
 1. The first section discusses installing the **Gopherbot** distribution archive, normally in `/opt/gopherbot`; this provides the `gopherbot` binary, default configuration, and an assortment of included batteries (libraries, plugins, jobs, tasks, helper scripts and more); if you're using a [Gopherbot container](https://github.com/orgs/lnxjedi/packages), installation is essentially a no-op.

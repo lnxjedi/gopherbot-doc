@@ -1,6 +1,6 @@
 # Slack Socket Mode
 
-Starting with v2.5.0, **Gopherbot** uses the Slack [socket mode](https://api.slack.com/apis/connections/socket) [EventsAPI](https://api.slack.com/apis/connections/events-api) for bot credentials. You'll need to log on to your Slack team in the browser at **https://\<_your-team-name_\>.slack.com** with administrator credentials.
+Starting with v2.5.0, **Gopherbot** uses the Slack [socket mode](https://api.slack.com/apis/connections/socket) [EventsAPI](https://api.slack.com/apis/connections/events-api) for bot credentials. You'll need to log on to your Slack team in the browser at **https://\<_your-team-name_\>.slack.com** with administrator credentials to obtain the required secrets for your robot.
 
 ## Generating a Slack App Manifest
 

@@ -1,6 +1,6 @@
 # Environment Requirements
 
-> Up-to-date with v2.4; Nov. '21
+> Up-to-date with v2.6; Nov. '21
 
 To set up your robot you'll need:
 * Access to a Linux host with the **Gopherbot** software installed, or an environment where you can run and interact with the [official Gopherbot container image](https://github.com/lnxjedi/gopherbot/pkgs/container/gopherbot-dev)

@@ -1,6 +1,6 @@
 # Terminology
 
-> Up-to-date with v2.4
+> Up-to-date with v2.6
 
 This section is most important for referring back to as you read the documentation, to disambiguate terms.
 
