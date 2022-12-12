@@ -1,10 +1,10 @@
 # Slack Socket Mode
 
-Starting with v2.5.0, **Gopherbot** uses the Slack [socket mode](https://api.slack.com/apis/connections/socket) [EventsAPI](https://api.slack.com/apis/connections/events-api) for bot credentials. You'll need to log on to your Slack team in the browser at **https://\<_your-team-name_\>.slack.com** with administrator credentials to obtain the required secrets for your robot.
+Starting with v2.5.0, **Gopherbot** uses the Slack [socket mode](https://api.slack.com/apis/connections/socket) [EventsAPI](https://api.slack.com/apis/connections/events-api) for bot credentials, which is more fine-grained and complicated.
 
 ## Generating a Slack App Manifest
 
-To save a LOT of time, we'll use a Slack [app manifest](https://api.slack.com/reference/manifests) to configure the settings for your app. You'll need to create this **yaml** file in a text editor. You can get a copy of **Clu's** template to start from in the [Gopherbot source](https://raw.githubusercontent.com/lnxjedi/gopherbot/main/resources/slack/appmanifest.yaml), or copy and paste from here:
+To save a LOT of time, we'll use a Slack [app manifest](https://api.slack.com/reference/manifests) to configure the settings for your app. You'll need to customize your own **yaml** file in a text editor. You can start with a copy of **Clu's** template from in the [Gopherbot source](https://raw.githubusercontent.com/lnxjedi/gopherbot/main/resources/slack/appmanifest.yaml), or copy and paste from here:
 ```yaml
 # See: https://api.slack.com/reference/manifests
 _metadata:
