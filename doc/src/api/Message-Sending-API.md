@@ -24,8 +24,10 @@ The `MessageFormat(raw|variable|fixed)` method returns a robot object with the s
 `GetBotAttribute("protocol")` to determine the connector protocol (e.g. "slack") to make intelligent decisions
 about the format to use, or modify the content of raw messages depending on the connection protocol.
 
-# Say and Reply
+# Say/SayThread and Reply/ReplyThread
 `Say` and `Reply` are the staples of message sending. Both are generally used for replying to the person who spoke to the robot, but `Reply` will also _mention_ the user. Normally, `Say` is used when the robot responds immediately to the user, but `Reply` is used when the robot is performing a task that takes more than a few minutes, and the robot needs to direct the message to the user to update them with progress on the task. Both `Say` and `Reply` take a `message` argument, and an optional second `format` argument that can be `variable` (the default) for variable-width text, or `fixed` for fixed-width text. The `fixed` format is normally used with embedded newlines to create tabular output where the columns will line up. The return value is not normally checked, but can be one of `Ok`, `UserNotFound`, `ChannelNotFound`, or `FailedMessageSend`.
+
+Additionally, `Say` and `Reply` will send a message to the channel for a message sent directly to the channel, or in a thread if the message came in a thread. By using the `Thread` variants (`SayThread`, `ReplyThread`), the robot will create a new message thread if the original message was not already in a thread.
 
 # SendUserMessage, SendChannelMessage and SendUserChannelMessage
 `Say` and `Reply` are actually convenience wrappers for the `Send*Message` family of methods. `SendChannelMessage` takes the obvious arguments of `channel` and `message` and just writes a message to a channel. `SendUserMessage` sends a direct message to a user, and `SendUserChannelMessage` directs the message to a user in a channel by using a connector-specific _mention_. Like `Say` and `Reply`, each of these functions also takes an optional `format` argument, and uses the same return values.

@@ -82,6 +82,8 @@ Finally, if encryption is initialized on start-up, `GOPHER_ENCRYPTION_INITIALIZE
 ## Pipeline Environment Variables
 The following environment variable are set for all pipelines, whether started by a plugin or a job:
 * `GOPHER_CHANNEL` - the channel where the plugin/job is providing output
+* `GOPHER_THREAD_ID` - an opaque string value identifying the conversation thread
+* `GOPHER_THREADED_MESSAGE` - set "true" if the message was received in a thread
 * `GOPHER_USER` - the user whose message created the pipeline (if any)
 * `GOPHER_PROTOCOL` - the name of the protocol in use, e.g. "slack"
 * `GOPHER_PIPE_NAME` - the name of the plugin or job that started the pipeline

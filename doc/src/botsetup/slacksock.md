@@ -1,10 +1,14 @@
 # Slack Socket Mode
 
-Starting with v2.5.0, **Gopherbot** uses the Slack [socket mode](https://api.slack.com/apis/connections/socket) [EventsAPI](https://api.slack.com/apis/connections/events-api) for bot credentials, which is more fine-grained and complicated.
+Starting with v2.5.0, **Gopherbot** uses the Slack [socket mode](https://api.slack.com/apis/connections/socket) [EventsAPI](https://api.slack.com/apis/connections/events-api) for bot credentials, which has more fine-grained permissions and settings than the old **RTM**-style credentials.
 
 ## Generating a Slack App Manifest
 
-To save a LOT of time, we'll use a Slack [app manifest](https://api.slack.com/reference/manifests) to configure the settings for your app. You'll need to customize your own **yaml** file in a text editor. You can start with a copy of **Clu's** template from in the [Gopherbot source](https://raw.githubusercontent.com/lnxjedi/gopherbot/main/resources/slack/appmanifest.yaml), or copy and paste from here:
+To save a LOT of time, we'll use a Slack [app manifest](https://api.slack.com/reference/manifests) to configure the settings for your app. You'll need to create a customized **yaml** file in a text editor based on the template provided with **Gopherbot**.
+
+If you're setting up your robot in the Gopherbot IDE, you can just press `<ctrl-p>` to open the file search dialog and search for `appmanifest.yaml`, then `File | Save As...` to save a copy in the `/home/bot` directory.
+
+You can start also with a copy of **Clu's** template from the [Gopherbot source](https://raw.githubusercontent.com/lnxjedi/gopherbot/main/resources/slack/appmanifest.yaml), or copy and paste from here:
 ```yaml
 # See: https://api.slack.com/reference/manifests
 _metadata:
@@ -70,18 +74,19 @@ You should change the display information and display name, and decide if you wa
 
 ## Creating a New Slack App
 
-1. Once you're logged in, visit the [Slack apps](https://api.slack.com/apps) page, and click **Create New App**
-2. Select **From an app manifest**, choose your workspace, and click **Next**
-3. Paste in the full contents of the app manifest you created and click **Next**
+1. Once you're logged in to your Slack team in the browser, visit the [Slack apps](https://api.slack.com/apps) page, then click **Create New App**
+2. Select **From an app manifest**, choose your workspace, then click **Next**
+3. Select the `YAML` tab and paste in the full contents of the app manifest you created (replacing the default contents), then click **Next**
 4. Review the settings, then click **Create** to create the Slack app for your robot
-5. Note that the **OAuth** credentials shown aren't the credentials needed for **Gopherbot**
-6. Click **Install to Workspace** and select the workspace where you want to deploy your robot
+5. Note that the **App Credentials** shown aren't the credentials needed for **Gopherbot**
+6. Click **Install to Workspace**, review the requested permissions, then finally click **Allow**
 
 ## Obtaining the App Token and Bot Token for your App
 
 Now that you've created a Slack app for your robot, you'll need to generate and/or locate the credentials you'll need for configuration.
 
-1. From the app configuration view **Basic Information** page, scroll down to **App-Level Tokens** and click the **Generate Token and Scopes** button
-2. Give the token a name, then add both the **connections:write** and **authorizations:read** scopes
+1. From the app configuration **Basic Information** page, scroll down to **App-Level Tokens** and click the **Generate Token and Scopes** button
+2. Give the token a name (e.g. "Token for Gopherbot"), then add both the **connections:write** and **authorizations:read** scopes
 3. Click **Generate**, then copy and save your app token (`xapp-*`) in a safe place for later
-4. Select the **Install App** or **OAuth & Permissions** section on the left, then copy and save your Bot User OAuth token (`xoxb-*`) in a safe place for later
+4. Click **Done** to close the dialog
+5. Select the **Install App** or **OAuth & Permissions** section on the left, then copy and save your Bot User OAuth token (`xoxb-*`) in a safe place for later

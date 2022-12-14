@@ -1,42 +1,29 @@
-# Quick Start with Autosetup
+# Quick Start with the Gopherbot IDE
 
-## Setting up a New Robot on Linux
+Once you have a running [Goperbot IDE](/botdev/IDE.html) and the [required credentials](/botsetup/credentials.html):
 
-If you have easy access to a Linux system, the simplest way to set up a new robot is to [install the gopherbot archive](../install/ManualInstall.html), create an empty working directory, create a symlink there to the `/opt/gopherbot/gopherbot` executable, then use the autosetup plugin as described in the docker instructions below (with appropriate and obvious modifications, e.g. running `./gopherbot init slack`).
+1. Press ``<ctrl-shift-`>`` to open a new terminal in `/home/bot`
 
-## Setting up a New Robot with Docker
-
-If you're running a Windows or MacOS system, the best way to set up a new robot is using the [gopherbot-dev](https://github.com/lnxjedi/gopherbot/pkgs/container/gopherbot-dev) container image running in [Docker](https://www.docker.com/) on your workstation. Using **Clu** as an example:
-
-**1.** Start a new, empty `gopherbot-dev` container:
-
+2. Run `gopherbot init slack` to generate `/home/bot/answerfile.txt`:
 ```
-$ docker run -p 127.0.0.1:3000:3000 --name clu quay.io/lnxjedi/gopherbot-dev:latest
-root INFO Configuration directory URI: 'file:///home/robot/.theia'
-...
-root INFO Deploy plugins list took: 441.6 ms
-```
-
-**2.** Open your browser and browse to `http://127.0.0.1:3000` to view the [Theia](https://github.com/eclipse-theia/theia) interface.
-
-**3.** Open a terminal from the `Terminal` menu, and run `gopherbot init slack` to get a slack `answerfile.txt`:
-```
-$ gopherbot init slack
+[~]$ gopherbot init slack
 Edit 'answerfile.txt' and re-run gopherbot with no arguments to generate your robot.
 ```
 
-**4.** Click the file icon or use the `File ... Open...` menu to open the newly-created `answerfile.txt`, then follow the directions to fill in the blanks. Note that the answerfile template also contains documentation regarding the requirements for setting up your robot, including information on obtaining credentials for your robot to use with team chat.
+3. In the left-side file explorer, locate and open `answerfile.txt` under `bot`
 
-> If you're not already familiar with **ssh deploy keys**, you should read up on the documentation for your *git* provider; see for example the [Github deploy keys](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys) documentation, which also has useful information about [machine users](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users).
+4. Follow the directions in the file to fill in the blanks, then save the file.
 
-**5.** When you've finished editing and saving `answerfile.txt`, re-run `gopherbot`; your robot will process the answerfile to generate your robot's initial configuration:
+> If you're not already familiar with **ssh deploy keys**, you should read up on the documentation for your *git* provider; see for example the [GitHub deploy keys](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys) documentation, which also has useful information about [machine users](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users).
+
+5. When you've finished editing and saving `answerfile.txt`, re-run `gopherbot` without any arguments; your robot will process the answerfile to generate your robot's initial configuration:
 ```
 $ gopherbot 
-2020/03/22 10:40:57 Info: Logging to robot.log
+[~]$ gopherbot 
+2022/12/14 17:52:50 Info: Logging to robot.log
 null connector: Initializing encryption and restarting...
-2020/03/22 10:40:59 Info: Logging to robot.log
+2022/12/14 17:52:51 Info: Logging to robot.log
 null connector: Continuing automatic setup...
-null connector: Generating ssh keys...
 ...
 null connector: ********************************************************
 
@@ -50,8 +37,8 @@ need this for completing setup.
 setup)
 ```
 
-**6.** Follow the instructions to get your robot connected to your team chat, add yourself as a robot administrator, and save your robot to it's *git* repository.
-> NOTE: the quickest way to open a second terminal is to click the "Split Terminal" box in the upper-right corner of your initial terminal.
+6. Follow the instructions to get your robot connected to your team chat, add yourself as a robot administrator, and save your robot to it's *git* repository.
+> NOTE: the quickest way to open a second terminal is to click the "Split Terminal" box in the upper-right corner of your initial terminal. To access the public keys for configuring deployment keys, you can e.g. `cat custom/ssh/deploy_key.pub`, or open it from the file explorer
 
 That's it - your robot is ready to be deployed and start doing some work. Once you've saved the robot's `.env` file to a safe location, you can delete the container. The rest of this manual details deploying and managing your robot.
 

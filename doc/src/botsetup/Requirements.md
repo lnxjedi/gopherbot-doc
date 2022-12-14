@@ -1,12 +1,12 @@
 # Environment Requirements
 
-> Up-to-date with v2.6; Nov. '21
+> Up-to-date with v2.6
 
 To set up your robot you'll need:
-* Access to a Linux host with the **Gopherbot** software installed, or an environment where you can run and interact with the [official Gopherbot container image](https://github.com/lnxjedi/gopherbot/pkgs/container/gopherbot-dev)
+* Access to a Linux host with the **Gopherbot** software installed, or a running instance of the [Gopherbot IDE](/botdev/IDE.html)
 * The name of a channel where your robot will run jobs by default, e.g. `clu-jobs` or `data-jobs`
 * A completely empty (no README, LICENSE, etc.) public or private *git* repository, to store your robot; a common naming convention is *botname*-gopherbot. For example, you can find **Clu** at [https://github.com/parsley42/clu-gopherbot](https://github.com/parsley42/clu-gopherbot)
-* If you're using a container and/or the **autosetup plugin**, you'll need to be able to configure read/write and read-only deploy keys for the robot's repository - this is widely supported with almost all of the major *git* hosting services and applications, check your repository settings or consult the documentation for your particular service (the Github documentation can be found [here](https://docs.github.com/en/free-pro-team@latest/developers/overview/managing-deploy-keys#deploy-keys))
+* If you're using the IDE and/or the **autosetup plugin**, you'll need to be able to configure a read-only (and optionally read/write) deploy key for the robot's repository - this is widely supported with almost all of the major *git* hosting services and applications, check your repository settings or consult the documentation for your particular service (the GitHub documentation can be found [here](https://docs.github.com/en/free-pro-team@latest/developers/overview/managing-deploy-keys#deploy-keys))
 
 > Note on Deploy Keys: If you are unfamiliar with ssh deploy keys, you should take a few minutes to read your git provider's documentation. A standard *Gopherbot* robot uses two deploy keys which are dedicated for use with the robot's repository.
 

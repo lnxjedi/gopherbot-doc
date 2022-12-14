@@ -1,4 +1,4 @@
-# Installing **Gopherbot** on Linux
+# Installing **Gopherbot**
 
 > Up-to-date with v2.6
 

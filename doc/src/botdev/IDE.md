@@ -6,7 +6,7 @@ Starting with version 2.6, the **Gopherbot** CI/CD pipelines are configured to c
 * The most recent release of [OpenVSCode Server](https://github.com/gitpod-io/openvscode-server)
 * Pre-installed OpenVSCode language extensions for python, ruby and Go, including required modules
 
-> While using the IDE isn't strictly necessary, all documentation will be written using it, as well as all future releases of **Gopherbot**.
+> While using the IDE isn't strictly necessary, all documentation and future releases of **Gopherbot** will be written using it.
 
 ## Requirements
 
@@ -17,13 +17,15 @@ To work with the **Gopherbot IDE**, you'll need one of:
 
 > Note that the common theme here is `docker` and `bash` - the primary script for managing the Gopherbot IDE (`cbot.sh`) is written in **bash**.
 
-The Gopherbot IDE is created primarily for use with **ssh** git credentials, though it also includes the `gh`. Within your host environment, you'll also need an ssh keypair configured for pushing to your robot's repository with **git**.
+The Gopherbot IDE is designed for use with **ssh** git credentials, though it also includes the `gh` utility. It would be helpful in following the tutorials to have an ssh keypair to use for development; if you're only using the IDE for managing a single robot, this could be a special-purpose keypair that you configure as a read-write deployment key for your robot git repository. Generating and configuring read-write deployment keys is outside the scope of this manual.
 
 ## Getting Started
 
 > This section will describe setting up a simple directory called `botwork` for working with you robot(s); feel free to adjust specific paths and commands according to your preferences and comfort with the command line.
 
-1. Open a terminal window in one of the required environments, then create a new `botwork` directory and change to that directory:
+For this walk-through, the commands you'll use, along with sample generated output, are shown in text boxes. You'll need to copy/paste (or type) the commands shown, modifying for your particular setup/robot. Also note that some of the commands shown may be wider than the text box, so you'll need to slide the scrollbar to see the full command if you're typing them yourself.
+
+1. In a terminal window create a new `botwork` directory, then change to that directory:
 ```shell
 ~$ mkdir botwork
 ~$ cd botwork/
@@ -41,7 +43,7 @@ $ curl -o cbot.sh https://raw.githubusercontent.com/lnxjedi/gopherbot/main/cbot.
 Usage: ./botc.sh profile|dev|start|stop|remove (options...) (arguments...)
 ...
 ```
-3. Generate a new profile for working on your robot; replace `dolores` in the example with the name you'll give your robot:
+3. Generate a new profile for working on your robot; in the example command shown, you'll need to change the robot name, full name and email address (used for attributing git pushes):
 ```shell
 $ ./cbot.sh profile -k ~/.ssh/id_rsa dolores "David Parsley" parsley@linuxjedi.org | tee dolores.env
 ## Lines starting with #| are used by the cbot.sh script
@@ -52,7 +54,7 @@ GIT_COMMITTER_EMAIL=parsley@linuxjedi.org
 #|CONTAINERNAME=dolores
 #|SSH_KEY_PATH=/home/david/.ssh/id_rsa
 ```
-> Note that in the example we supplied the path to a standard encrypted private key; this could also be a deployment key, or left out altogether if other authentication means are used. Due to the inherent security of encrypted ssh keys and ssh-agent, this manual will use ssh for all examples.
+> Note that the ssh-key argument is optional. OpenVSCode includes a GitHub extension that can be used for publishing to GitHub, but that workflow isn't documented here.
 
 4. Start a development container:
 ```shell
