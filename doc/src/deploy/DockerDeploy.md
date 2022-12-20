@@ -1,5 +1,7 @@
 # Docker Example
 
+> NOTE: This section is **outdated**.
+
 For certain environments, running your robot in a standard docker container on your server or workstation is perfectly reasonable. You can use this example to help get your robot running.
 
 ## Production Container

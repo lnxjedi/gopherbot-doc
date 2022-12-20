@@ -6,7 +6,9 @@ Starting with version 2.6, the **Gopherbot** CI/CD pipelines are configured to c
 * The most recent release of [OpenVSCode Server](https://github.com/gitpod-io/openvscode-server)
 * Pre-installed OpenVSCode language extensions for python, ruby and Go, including required modules
 
-> While using the IDE isn't strictly necessary, all documentation and future releases of **Gopherbot** will be written using it.
+> The **Gopherbot** IDE was developed mainly for me - the Gopherbot developer - and for lazy[^lazy] DevOps engineers and programmers that just want to quickly get up and running. All new development and documentation after Dec '22 will be created with the IDE, but the **Gopherbot** software will remain flexible enough to support a variety of workflows and development environments. This is just my effort at providing something that definitely works.
+
+[^lazy]: [Laziness is a Virtue](https://thethreevirtues.com/)
 
 ## Requirements
 

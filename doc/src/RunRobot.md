@@ -1,5 +1,17 @@
 # Deploying and Running Your Robot
 
+**Gopherbot** is built on a self-deploying foundation, and deploying **Gopherbot** generally means starting the `gopherbot` binary in an empty directory with four environment variables set, or a `.env` file in the directory defining the four environment variables. Using **Clu** as an example:
+```
+GOPHER_ENCRYPTION_KEY=<redacted>
+GOPHER_PROTOCOL=slack
+GOPHER_CUSTOM_REPOSITORY=git@github.com:parsley42/clu-gopherbot.git
+GOPHER_DEPLOY_KEY=-----BEGIN_OPENSSH_PRIVATE_KEY-----:<much junk removed>:-----END_OPENSSH_PRIVATE_KEY-----:
+```
+
+Mostly, that's is - `gopherbot` will recognize there's no robot present and start bootstrapping your robot from it's git repository.
+
+> NOTE: The rest of this section is **outdated**.
+
 **Gopherbot** is very flexible about being able to bootstrap and run in a variety of environments, and is designed to be remotely updated via git integration. This chapter discusses the two primary ways you'll run your robot:
 
 * Using [Podman](https://podman.io), [Docker](https://docker.com), [Kubernetes](https://kubernetes.io), or any number of other container-centric environments, you can bootstrap and run your robot [in a Container](deploy/Container.md)
