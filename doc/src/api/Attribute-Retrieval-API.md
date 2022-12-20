@@ -9,7 +9,7 @@ The available attributes for a user / sender:
  * firstName
  * lastName
  * phone
- * internalID (protocol internal representatation)
+ * internalID (protocol internal representation)
 
 ## Bot Attributes
 The available attributes for the bot:
@@ -19,6 +19,7 @@ The available attributes for the bot:
  * contact / admin / adminContact
  * email
  * protocol (e.g. "slack")
+ * internalID (protocol internal representation)
 
 Note: the values for most of these are configured in `conf/robot.yaml`
 
