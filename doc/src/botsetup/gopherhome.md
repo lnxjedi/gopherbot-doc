@@ -66,7 +66,7 @@ The `custom/` directory is essentially *your robot*, and corresponds to your rob
 ### During Development
 
 When developing jobs, tasks and plugins for your robot, you'll mostly use the terminal connector and treat `state/` as disposable. A fairly standard workflow goes like this:
-1. Run your robot with the `./cbot.sh dev <path/to/profile>` script, which uses the [gopherbot-dev](https://github.com/lnxjedi/gopherbot/pkgs/container/gopherbot-dev) container, providing the path to a profile used for that robot
+1. Run your robot with the `./cbot.sh start <path/to/profile>` script, which uses the [gopherbot-dev](https://github.com/lnxjedi/gopherbot/pkgs/container/gopherbot-dev) container, providing the path to a profile used for that robot
 1. Use the **terminal** connector, configured to mirror your team chat environment, for developing extensions for your robot
 1. In the `custom/` directory, create commits as desired, creating and pushing commits as normal
 1. Send an administrator `update` command to your production robot to pull down the latest changes and reload

@@ -60,8 +60,8 @@ GIT_COMMITTER_EMAIL=parsley@linuxjedi.org
 
 4. Start a development container:
 ```shell
-$ ./cbot.sh dev dolores.env
-Starting 'dolores':
+$ ./cbot.sh start dolores.env
+Starting 'dolores-dev':
 dolores
 Copying /home/david/.ssh/id_rsa to dolores:/home/bot/.ssh/id_ssh ...
 Access your dev environment at: http://localhost:7777/?workspace=/home/bot/gopherbot.code-workspace&tkn=XXXX
