@@ -21,6 +21,34 @@ To work with the **Gopherbot IDE**, you'll need one of:
 
 The Gopherbot IDE is designed for use with **ssh** git credentials, though it also includes the `gh` utility. It would be helpful in following the tutorials to have an ssh keypair to use for development; if you're only using the IDE for managing a single robot, this could be a special-purpose keypair that you configure as a read-write deployment key for your robot git repository. Generating and configuring read-write deployment keys is outside the scope of this manual.
 
+## Previewing Gopherbot
+
+If you're just previewing the **Gopherbot** software, you can just download the `cbot.sh` wrapper script and run the preview, otherwise you should skip down to [Getting Started](#getting-started).
+
+1. Download the latest `cbot.sh` wrapper script for docker:
+```
+curl -o cbot.sh https://raw.githubusercontent.com/lnxjedi/gopherbot/main/cbot.sh
+```
+2. Make the script executable:
+```
+chmod +x cbot.sh
+```
+
+3. Run the preview container:
+```
+./cbot.sh preview
+```
+
+4. Connect to the URL, then:
+   * open a terminal window in the home (`bot`) directory (or type `cd` to change to the home directory)
+   * run `gopherbot` to start **Floyd**, the default robot
+
+5. To clean up:
+```
+./cbot.sh preview -r
+docker image rm ghcr.io/lnxjedi/gopherbot-dev:latest
+```
+
 ## Getting Started
 
 > This section will describe setting up a simple directory called `botwork` for working with you robot(s); feel free to adjust specific paths and commands according to your preferences and comfort with the command line.
