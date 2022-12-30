@@ -86,6 +86,8 @@ The following environment variable are set for all pipelines, whether started by
 * `GOPHER_THREADED_MESSAGE` - set "true" if the message was received in a thread
 * `GOPHER_USER` - the user whose message created the pipeline (if any)
 * `GOPHER_PROTOCOL` - the name of the protocol in use, e.g. "slack"
+* `GOPHER_BRAIN` - the type of brain in use
+* `GOPHER_ENVIRONMENT` - "production", unless overridden
 * `GOPHER_PIPE_NAME` - the name of the plugin or job that started the pipeline
 * `GOPHER_TASK_NAME` - the name of the running task
 * `GOPHER_PIPELINE_TYPE` - the event type that started the current pipeline, one of:
