@@ -82,6 +82,7 @@ Finally, if encryption is initialized on start-up, `GOPHER_ENCRYPTION_INITIALIZE
 ## Pipeline Environment Variables
 The following environment variable are set for all pipelines, whether started by a plugin or a job:
 * `GOPHER_CHANNEL` - the channel where the plugin/job is providing output
+* `GOPHER_MESSAGE_ID` - the opaque message id of the matching message
 * `GOPHER_THREAD_ID` - an opaque string value identifying the conversation thread
 * `GOPHER_THREADED_MESSAGE` - set "true" if the message was received in a thread
 * `GOPHER_USER` - the user whose message created the pipeline (if any)
@@ -101,6 +102,9 @@ The following environment variable are set for all pipelines, whether started by
 The following are also supplied whenever a job is run:
 * `GOPHER_JOB_NAME` - the name of the running job
 * `GOPHER_START_CHANNEL` - the channel where the job was started
+* `GOPHER_START_MESSAGE_ID` - the opaque message id for the message that started the job
+* `GOPHER_START_THREAD_ID` - the opaque thread id where the job was started
+* `GOPHER_START_THREADED_MESSAGE` - whether the job was started from a message in a thread
 * `GOPHER_REPOSITORY` - the extended namespace from `repositories.yaml`, if any
 * `GOPHER_LOG_LINK` - link to job log, if non-ephemeral
 * `GOPHER_LOG_REF` - log reference used for email log and tail log commands
