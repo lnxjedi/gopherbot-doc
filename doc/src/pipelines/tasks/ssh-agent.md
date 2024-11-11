@@ -1,6 +1,6 @@
 ___
 
-**ssh-agent** (privileged)
+**ssh-agent** - *privileged*
 
 Usage:
 - `AddTask ssh-agent start <path/to/key> <timeout>` - requires `BOT_SSH_PHRASE` in parameters
