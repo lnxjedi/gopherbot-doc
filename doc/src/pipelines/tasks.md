@@ -20,4 +20,6 @@
 
 {{#include tasks/send-message.md}}
 
+{{#include tasks/ssh-agent.md}}
+
 {{#include tasks/tail-log.md}}

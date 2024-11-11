@@ -23,8 +23,8 @@ jobs:
           ref: gh-pages
 
       - name: Setup mdBook
-        # peaceris/actions-mdbook v1.1.14
-        uses: peaceiris/actions-mdbook@4b5ef36b314c2599664ca107bb8c02412548d79d
+        # peaceris/actions-mdbook v2.0.0
+        uses: peaceiris/actions-mdbook@ee69d230fe19748b7abf22df32acaa93833fad08
         with:
           mdbook-version: 'latest'
 
