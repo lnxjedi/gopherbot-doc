@@ -22,4 +22,6 @@
 
 {{#include tasks/ssh-agent.md}}
 
+{{#include tasks/ssh-git-helper.md}}
+
 {{#include tasks/tail-log.md}}
