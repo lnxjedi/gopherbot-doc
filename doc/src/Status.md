@@ -7,9 +7,7 @@ The docs in this book were reorganized in March 2026 around the workflow the pro
 - develop and run the engine locally on a Linux workstation
 - keep robot configuration in git
 - prefer built-in interpreters and current v3 config structure
-- treat containers as a deployment target, not the default authoring environment
-
-That also means some older ideas are intentionally de-emphasized here. The old container-first development story is no longer the center of the manual, and helper workflows built around that era should be considered historical unless they are documented in this book.
+- deploy the same robot cleanly to long-running environments
 
 ## What is current
 

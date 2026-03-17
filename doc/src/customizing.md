@@ -21,4 +21,4 @@ The current project preference is:
 2. Go for safety and performance
 3. JavaScript where it fits well
 
-Bash, Python, and Ruby are still supported, especially for existing automation, but they are no longer the center of the recommended authoring story.
+Bash, Python, and Ruby are still supported, especially when they are the most practical fit for an existing integration.

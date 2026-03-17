@@ -5,7 +5,7 @@ The book is being rewritten around the current v3 workflow:
 - local workstation development first
 - git-managed robot configuration
 - built-in interpreters and modern config layout
-- containers as a deployment target, not the default authoring environment
+- straightforward deployment to VMs, systemd, or containers
 
 To preview locally:
 

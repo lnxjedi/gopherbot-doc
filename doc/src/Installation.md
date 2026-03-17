@@ -1,13 +1,11 @@
 # Build and Install
 
-The v3 installation story is simpler than the old documentation made it sound:
+The v3 installation story is simple:
 
 1. Install the engine once on a Linux machine you control.
 2. Create one or more robot working directories.
 3. Run the engine from those directories while you develop locally.
 4. When the robot is ready, deploy the same robot configuration to a VM, server, or container.
-
-The important shift is that local workstation development is now the default. The old container-first development workflow is no longer the recommended starting point, and helper scripts built for that model are intentionally out of scope for this guide.
 
 ## Two supported ways to install the engine
 

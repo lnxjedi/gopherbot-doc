@@ -18,7 +18,7 @@ If you are building from source instead of using a release archive:
 ## What you do not need for the default v3 workflow
 
 - A dev container just to write plugins
-- A legacy wrapper script just to start a development robot
+- An extra wrapper script just to start a development robot
 - External interpreters for every language up front
 
 You can still use Bash, Python, or Ruby extensions, but the modern path is to start with the built-in interpreters and Go support already included in the engine.

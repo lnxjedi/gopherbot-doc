@@ -1,6 +1,6 @@
 # Container Deployment
 
-Containers are still a valid deployment target. They are simply no longer the default development workflow.
+Containers are a valid deployment target for Gopherbot.
 
 ## Good use cases
 

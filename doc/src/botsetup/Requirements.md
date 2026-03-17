@@ -8,7 +8,7 @@ This is the workflow the v3 docs assume:
 4. Edit the robot's `custom/` files directly.
 5. Use `reload` to tighten the edit-test loop.
 
-## Why this replaced the old container-centric flow
+## Why this workflow works well
 
 Gopherbot is moving toward using its built-in interpreters and internal helpers more aggressively. That makes local authoring much smoother:
 
@@ -16,8 +16,6 @@ Gopherbot is moving toward using its built-in interpreters and internal helpers 
 - fast reload cycles
 - easier debugging of config and scripts
 - less friction for DevOps engineers who already live in a shell and editor
-
-Containers are still fine for deployment and for some local preferences, but they are no longer the center of the documented development story.
 
 ## A good minimum setup
 
