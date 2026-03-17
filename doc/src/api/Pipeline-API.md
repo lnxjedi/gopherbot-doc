@@ -1,49 +1,119 @@
-**Gopherbot** takes a slightly different approach to creating pipelines; pipelines are created by Add/Fail/Final Job/Command/Task family of methods, rather than by fixed configuration directives. This allows flexible configuration of pipelines if desired for e.g. a CI/CD application, or dynamic generation of pipelines based on logic at runtime.
+# Pipeline Methods
 
-Until more documentation is written, see:
-- [The Gopherbot Pipeline Source](https://github.com/lnxjedi/gopherbot/blob/master/.gopherci/pipeline.sh)
-- [The Configuration repository for Floyd, the robot that builds Gopherbot](https://github.com/parsley42/floyd-gopherbot)
+Gopherbot pipelines are built in code rather than declared in a separate pipeline language. That is why the Robot API includes methods for adding tasks, jobs, commands, cleanup steps, and failure handlers while a pipeline is being assembled.
 
-Table of Contents
-=================
+## Pipeline-building methods
 
-  * [AddTask](#addtask)
-  * [SetParameter](#setparameter)
+- `GetParameter(name)`
+- `SetParameter(name, value)`
+- `AddTask(name, args...)`
+- `FinalTask(name, args...)`
+- `FailTask(name, args...)`
+- `AddJob(name, args...)`
+- `SpawnJob(name, args...)`
+- `AddCommand(plugin, command)`
+- `FinalCommand(plugin, command)`
+- `FailCommand(plugin, command)`
+- `Exclusive(tag, queueTask)`
 
-## AddTask
-The `AddTask` method ... TODO: finish me!
+## Important behavior notes
+
+- `AddCommand(...)` composes another plugin command into the current pipeline. It is not the same thing as injecting a fresh user message.
+- `FinalTask(...)` runs during cleanup even if the main pipeline fails.
+- `FailTask(...)` and `FailCommand(...)` only run when the primary pipeline fails.
+- `SpawnJob(...)` starts work in parallel, while `AddJob(...)` adds a child job into the current pipeline flow.
+- `Exclusive(...)` is the advisory lock for protecting shared resources such as worktrees or deployment targets.
+
+`SetWorkingDirectory(...)` exists in the public Go API, but it is currently omitted from this user-facing reference until that area is revisited.
+
+## Examples
+
+### Go
+```go
+if !r.Exclusive("deploy-prod", false) {
+    r.Say("Another production deploy is already running.")
+    return robot.Normal
+}
+
+r.SetParameter("TARGET_ENV", "production")
+r.AddTask("build-artifact", "payments")
+r.AddTask("deploy-service", "payments")
+r.FinalTask("cleanup-worktree")
+r.FailTask("notify-deploy-failure")
+```
+
+### Lua
+```lua
+local gopherbot = require("gopherbot_v1")
+local task = gopherbot.task
+local Robot = gopherbot.Robot
+
+local bot = Robot:new()
+if not bot:Exclusive("deploy-prod", false) then
+  bot:Say("Another production deploy is already running.")
+  return task.Normal
+end
+
+bot:SetParameter("TARGET_ENV", "production")
+bot:AddTask("build-artifact", "payments")
+bot:AddTask("deploy-service", "payments")
+bot:FinalTask("cleanup-worktree")
+bot:FailTask("notify-deploy-failure")
+```
+
+### JavaScript
+```javascript
+const { Robot, task } = require("gopherbot_v1")();
+
+const bot = new Robot();
+if (!bot.Exclusive("deploy-prod", false)) {
+  bot.Say("Another production deploy is already running.");
+  return task.Normal;
+}
+
+bot.SetParameter("TARGET_ENV", "production");
+bot.AddTask("build-artifact", "payments");
+bot.AddTask("deploy-service", "payments");
+bot.FinalTask("cleanup-worktree");
+bot.FailTask("notify-deploy-failure");
+```
 
 ### Bash
 ```bash
-AddTask "echo" "hello, world"
+if ! Exclusive "deploy-prod" false
+then
+  Say "Another production deploy is already running."
+  exit 0
+fi
+
+SetParameter "TARGET_ENV" "production"
+AddTask "build-artifact" "payments"
+AddTask "deploy-service" "payments"
+FinalTask "cleanup-worktree"
+FailTask "notify-deploy-failure"
 ```
 
 ### Python
 ```python
-ret = bot.AddTask("echo", ["hello", "world"])
-bot.AddTask("robot-quit", [])
-```
-
-### Ruby
-
-```ruby
-ret = bot.AddTask("echo", ["hello", "world"])
-bot.AddTask("robot-quit", [])
-```
-
-## SetParameter
-
-### Bash
-```bash
-SetParameter "PING_LATENCY" "45ms"
-```
-
-### Python
-```python
-bot.SetParameter("PING_LATENCY", "45ms")
+if not bot.Exclusive("deploy-prod", False):
+    bot.Say("Another production deploy is already running.")
+else:
+    bot.SetParameter("TARGET_ENV", "production")
+    bot.AddTask("build-artifact", ["payments"])
+    bot.AddTask("deploy-service", ["payments"])
+    bot.FinalTask("cleanup-worktree", [])
+    bot.FailTask("notify-deploy-failure", [])
 ```
 
 ### Ruby
 ```ruby
-bot.SetParameter("PING_LATENCY", "45ms")
+if !bot.Exclusive("deploy-prod", false)
+  bot.Say("Another production deploy is already running.")
+else
+  bot.SetParameter("TARGET_ENV", "production")
+  bot.AddTask("build-artifact", ["payments"])
+  bot.AddTask("deploy-service", ["payments"])
+  bot.FinalTask("cleanup-worktree", [])
+  bot.FailTask("notify-deploy-failure", [])
+end
 ```

@@ -1,63 +1,115 @@
-Table of Contents
-=================
+# Sending Messages and Formatting
 
-  * [Message Formatting](#message-formatting)
-  * [Say and Reply](#say-and-reply)
-  * [SendUserMessage, SendChannelMessage and SendUserChannelMessage](#sendusermessage-sendchannelmessage-and-senduserchannelmessage)
-  * [Code Examples](#code-examples)
-    * [Bash](#bash)
-    * [Python](#python)
-    * [Ruby](#ruby)
+The Robot API separates message destination from message format. That makes it possible to keep most extensions protocol-agnostic while still sending readable output to Slack, SSH, and other connectors.
 
-# MessageFormat method and Message Formatting
-**Gopherbot** is designed to provide ChatOps functionality for a variety of team
-chat platforms, with Slack being the first. Due to the technical nature of ChatOps,
-characters like `_`, `*` and ` may need to be rendered in replies to the user;
-at times omitting these characters (because they cause formatting changes) could
-remove important information. To provide the plugin author with the most flexibility,
-**Gopherbot** supports the notion of three message formats:
-* `Raw` - text sent by a plugin with `Raw` format is passed straight to the chat platform as-is; this is the default if no other default is specified
-* `Variable` - for the `Variable` format, the protocol connector should attempt to process the message so that special characters are escaped or otherwise modified to render for the user in a standard variable-width font; for Slack, special characters are surrounded by nulls
-* `Fixed` - the protocol connector should render `Fixed` format messages in a fixed-width block format
+## Message formats
 
-The `MessageFormat(raw|variable|fixed)` method returns a robot object with the specified format. A plugin can use
-`GetBotAttribute("protocol")` to determine the connector protocol (e.g. "slack") to make intelligent decisions
-about the format to use, or modify the content of raw messages depending on the connection protocol.
+- `BasicMarkdown`
+  - the v3 default outgoing format
+  - intended to be the portable, cross-protocol choice for most normal replies
+- `Variable`
+  - literal variable-width text
+  - useful when you want normal text without connector-driven formatting surprises
+- `Fixed`
+  - preformatted output for code, logs, and tabular text
+- `Raw`
+  - connector-native pass-through
+  - use sparingly, because it gives up portability
 
-# Say/SayThread and Reply/ReplyThread
-`Say` and `Reply` are the staples of message sending. Both are generally used for replying to the person who spoke to the robot, but `Reply` will also _mention_ the user. Normally, `Say` is used when the robot responds immediately to the user, but `Reply` is used when the robot is performing a task that takes more than a few minutes, and the robot needs to direct the message to the user to update them with progress on the task. Both `Say` and `Reply` take a `message` argument, and an optional second `format` argument that can be `variable` (the default) for variable-width text, or `fixed` for fixed-width text. The `fixed` format is normally used with embedded newlines to create tabular output where the columns will line up. The return value is not normally checked, but can be one of `Ok`, `UserNotFound`, `ChannelNotFound`, or `FailedMessageSend`.
+For the actual `BasicMarkdown` syntax contract, see [BasicMarkdown Reference](../BasicMarkdown.md).
 
-Additionally, `Say` and `Reply` will send a message to the channel for a message sent directly to the channel, or in a thread if the message came in a thread. By using the `Thread` variants (`SayThread`, `ReplyThread`), the robot will create a new message thread if the original message was not already in a thread.
+## Default and overrides
 
-# SendUserMessage, SendChannelMessage and SendUserChannelMessage
-`Say` and `Reply` are actually convenience wrappers for the `Send*Message` family of methods. `SendChannelMessage` takes the obvious arguments of `channel` and `message` and just writes a message to a channel. `SendUserMessage` sends a direct message to a user, and `SendUserChannelMessage` directs the message to a user in a channel by using a connector-specific _mention_. Like `Say` and `Reply`, each of these functions also takes an optional `format` argument, and uses the same return values.
+Outgoing format is chosen in this order:
 
-# Code Examples
-## Bash
+1. an explicit format on the send call or helper Robot
+2. `GOPHER_MESSAGE_FORMAT` if set
+3. `DefaultMessageFormat`
+4. the v3 default of `BasicMarkdown`
+
+The usual helpers are:
+
+- `MessageFormat(...)`
+- `Fixed()`
+- `Direct()`
+- `Threaded()`
+
+## Main message-sending methods
+
+- `Say(...)` and `Reply(...)`
+  - send in the current context
+- `SayThread(...)` and `ReplyThread(...)`
+  - force thread-aware delivery
+- `SendChannelMessage(...)` and `SendChannelThreadMessage(...)`
+  - send to a specific channel
+- `SendUserMessage(...)`
+  - send a direct message
+- `SendUserChannelMessage(...)` and `SendUserChannelThreadMessage(...)`
+  - direct a message to a user in a channel
+- `SendProtocolUserChannelMessage(...)`
+  - choose the connector explicitly for cross-protocol sends
+
+## Platform-specific rendering
+
+The API guarantees the intent of the format, not identical pixel-perfect rendering across every connector. For connector-specific notes such as Slack formatting behavior, check the relevant connector appendix after reading this page.
+
+## Examples
+
+### Go
+```go
+func handler(r robot.Robot, args ...string) robot.TaskRetVal {
+    r.Say("Build started for `%s`", args[0])
+    r.Fixed().Say("service   status\napi       ok\nworker    ok")
+    r.Direct().Reply("I will DM you when the deploy finishes.")
+    _ = r.SendProtocolUserChannelMessage("slack", "", "deployments", "*Deploy complete*")
+    return robot.Normal
+}
+```
+
+### Lua
+```lua
+local gopherbot = require("gopherbot_v1")
+local fmt = gopherbot.fmt
+local Robot = gopherbot.Robot
+
+local bot = Robot:new()
+bot:MessageFormat(fmt.BasicMarkdown):Say("Deploying `payments`")
+bot:Fixed():Say("service   status\napi       ok\nworker    ok")
+bot:Direct():Reply("I will DM you when the deploy finishes.")
+bot:SendProtocolUserChannelMessage("slack", "", "deployments", "*Deploy complete*", fmt.BasicMarkdown)
+```
+
+### JavaScript
+```javascript
+const { Robot, fmt } = require("gopherbot_v1")();
+
+const bot = new Robot();
+bot.MessageFormat(fmt.BasicMarkdown).Say("Deploying `payments`");
+bot.Fixed().Say("service   status\napi       ok\nworker    ok");
+bot.Direct().Reply("I will DM you when the deploy finishes.");
+bot.SendProtocolUserChannelMessage("slack", "", "deployments", "*Deploy complete*", fmt.BasicMarkdown);
+```
+
+### Bash
 ```bash
-# Note that bash isn't object-oriented
-Say "I'm sending a message to Bob in #general"
-SendUserChannelMessage "bob" "general" "Hi, Bob!"
-RETVAL = $?
-if [ $RETVAL -ne $GBRET_Ok ]
-then
-  Log "Error" "Unable to message Bob in #general - return code $RETVAL"
-fi
+Say -m 'Deploying `payments`'
+Say -f $'service   status\napi       ok\nworker    ok'
+SendUserMessage -m "$GOPHER_USER" "I will DM you when the deploy finishes."
+SendProtocolUserChannelMessage -m "slack" "" "deployments" "*Deploy complete*"
 ```
 
-## Python
+### Python
 ```python
-bot.Say("I'm sending a message to Bob in #general")
-retval = bot.SendUserChannelMessage("bob", "general", "Hi, Bob!")
-if ( retval != Robot.Ok ):
-  bot.Log("Error", "Unable to message Bob in #general - return code %d" % retval)
+bot.MessageFormat("BasicMarkdown").Say("Deploying `payments`")
+bot.MessageFormat("Fixed").Say("service   status\napi       ok\nworker    ok")
+bot.Direct().Reply("I will DM you when the deploy finishes.")
+bot.SendProtocolUserChannelMessage("slack", "", "deployments", "*Deploy complete*", "BasicMarkdown")
 ```
 
-## Ruby
+### Ruby
 ```ruby
-bot.Say("I'm sending a message to Bob in #general")
-retval = bot.SendUserChannelMessage("bob", "general", "Hi, Bob!")
-if retval != Robot::Ok
-  bot.Log("Error", "Unable to message Bob in #general - return code %d" % retval)
-end
+bot.MessageFormat("BasicMarkdown").Say("Deploying `payments`")
+bot.MessageFormat("Fixed").Say("service   status\napi       ok\nworker    ok")
+bot.Direct().Reply("I will DM you when the deploy finishes.")
+bot.SendProtocolUserChannelMessage("slack", "", "deployments", "*Deploy complete*", "BasicMarkdown")
 ```

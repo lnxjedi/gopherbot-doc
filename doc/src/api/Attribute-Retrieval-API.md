@@ -1,59 +1,113 @@
 # Getting Information About Users and the Robot
-The `Get*Attribute(...)` family of methods can be used to get basic chat service directory information like first and last name, email address, etc. `GetSenderAttribute` and `GetBotAttribute` take a single argument, the name of the attribute to retrieve. The lesser-used `GetUserAttribute` takes two arguments, the user and the attribute. The return value is an object with `Attribute` and `RetVal` members. `RetVal` will be one of `Ok`, `UserNotFound` or `AttributeNotFound`.
 
-## User Attributes
-The available attributes for a user / sender:
- * name (handle)
- * fullName
- * email
- * firstName
- * lastName
- * phone
- * internalID (protocol internal representation)
+The attribute methods give plugins and jobs access to directory-style metadata about the current sender, another user, or the robot itself.
 
-## Bot Attributes
-The available attributes for the bot:
- * name
- * alias
- * fullName / realName
- * contact / admin / adminContact
- * email
- * protocol (e.g. "slack")
- * internalID (protocol internal representation)
+## Methods
 
-Note: the values for most of these are configured in `conf/robot.yaml`
+- `GetSenderAttribute(attr)`
+- `GetUserAttribute(user, attr)`
+- `GetBotAttribute(attr)`
 
-# Code Examples
-## Bash
+All three methods return both a value and a return code. In Go that is represented by `*robot.AttrRet`. In the scripting bindings, the object usually stringifies to the attribute value while still exposing the return code.
+
+## Common user attributes
+
+- `name`
+- `fullName`
+- `email`
+- `firstName`
+- `lastName`
+- `phone`
+- `internalID`
+
+## Common bot attributes
+
+- `name`
+- `alias`
+- `fullName` or `realName`
+- `contact`, `admin`, or `adminContact`
+- `email`
+- `protocol`
+- `internalID`
+
+Most bot attributes come from robot configuration. User attributes come from the roster plus connector-local identity mapping.
+
+## Examples
+
+### Go
+```go
+func handler(r robot.Robot, args ...string) robot.TaskRetVal {
+    sender := r.GetSenderAttribute("email")
+    if sender.RetVal != robot.Ok {
+        r.Say("I could not find your email address.")
+        return robot.Normal
+    }
+
+    proto := r.GetBotAttribute("protocol")
+    r.Say("I know you as %s, and I am speaking on %s.", sender.Attribute, proto.Attribute)
+    return robot.Normal
+}
+```
+
+### Lua
+```lua
+local gopherbot = require("gopherbot_v1")
+local ret = gopherbot.ret
+local Robot = gopherbot.Robot
+
+local bot = Robot:new()
+local email, rv = bot:GetSenderAttribute("email")
+if rv ~= ret.Ok then
+  bot:Say("I could not find your email address.")
+else
+  local proto = bot:GetBotAttribute("protocol")
+  bot:Say("I know you as " .. email .. " on " .. tostring(proto))
+end
+```
+
+### JavaScript
+```javascript
+const { Robot, ret } = require("gopherbot_v1")();
+
+const bot = new Robot();
+const email = bot.GetSenderAttribute("email");
+if (email.retVal !== ret.Ok) {
+  bot.Say("I could not find your email address.");
+} else {
+  const proto = bot.GetBotAttribute("protocol");
+  bot.Say(`I know you as ${email.attribute} on ${proto.attribute}.`);
+}
+```
+
+### Bash
 ```bash
 USEREMAIL=$(GetSenderAttribute email)
 if [ $? -ne $GBRET_Ok ]
 then
-  Say "I was unable to look up your email address"
+  Say "I could not find your email address."
 else
-  Say "Your email address is $USEREMAIL"
+  PROTOCOL=$(GetBotAttribute protocol)
+  Say "I know you as $USEREMAIL on $PROTOCOL."
 fi
 ```
 
-## Python
+### Python
 ```python
-# In some cases you might forego error checking
-bot.Say("You can send email to %s" % bot.GetBotAttribte("email"))
-botNameAttr = bot.GetBotAttribute("fullName")
-if botNameAttr.ret == Robot.Ok:
-  bot.Say("My full name is %s" % botNameAttr)
+email = bot.GetSenderAttribute("email")
+if email.ret != Robot.Ok:
+    bot.Say("I could not find your email address.")
 else:
-  bot.Say("I don't even know what my name is!")
+    proto = bot.GetBotAttribute("protocol")
+    bot.Say("I know you as %s on %s." % (email, proto))
 ```
 
-## Ruby
+### Ruby
 ```ruby
-# In some cases you might forego error checking
-bot.Say("You can send email to #{bot.GetBotAttribute("email")}")
-botNameAttr = bot.GetBotAttribute("fullName")
-if botNameAttr.ret == Robot::Ok
-  bot.Say("My full name is #{botNameAttr}")
+email = bot.GetSenderAttribute("email")
+if email.ret != Robot::Ok
+  bot.Say("I could not find your email address.")
 else
-  bot.Say("I don't even know what my name is!")
+  proto = bot.GetBotAttribute("protocol")
+  bot.Say("I know you as #{email} on #{proto}.")
 end
 ```

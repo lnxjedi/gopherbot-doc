@@ -11,16 +11,22 @@ Every plugin, job, and task works through the Robot API.
 - pipeline assembly
 - admin and utility helpers
 
-## Common methods
+## API chapters
 
-- `Reply`, `Say`, `SendUserMessage`
-- `GetParameter`, `GetTaskConfig`
-- `GetSenderAttribute`, `GetBotAttribute`, `GetUserAttribute`
-- `PromptForReply`
-- `Remember`, `Recall`, `CheckoutDatum`, `UpdateDatum`
-- `AddTask`, `AddJob`, `AddCommand`
-- `FinalTask`, `FailTask`
-- `CheckAdmin`, `Elevate`, `Log`
+- [Language Choices](Languages.md)
+- [Attribute Retrieval](Attribute-Retrieval-API.md)
+- [Message Sending and Formatting](Message-Sending-API.md)
+- [Prompting for Replies](Response-Request-API.md)
+- [Memory and Brain Methods](Brain-API.md)
+- [Pipeline Methods](Pipeline-API.md)
+- [Utility Methods](Utility-API.md)
+- [Miscellaneous Methods](Misc-Methods.md)
+
+## Practical notes
+
+- The current first-class extension languages in this manual are Go, Lua, JavaScript, Bash, Python, and Ruby.
+- Not every language binding exposes every public Robot method. The detailed pages call out gaps where they matter.
+- Connector-specific rendering details live in the connector appendices. For message formatting behavior that depends on Slack or another protocol, start with the API chapter, then check the relevant appendix.
 
 ## Important v3 behavior notes
 

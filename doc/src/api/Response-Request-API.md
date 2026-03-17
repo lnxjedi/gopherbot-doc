@@ -1,107 +1,114 @@
-The `Prompt*ForReply` methods make it simple to write interactive plugins where the bot can request additional input from the user.
+# Prompting for Replies
 
-Table of Contents
-=================
+The `Prompt*ForReply` family supports interactive, multi-step commands where the robot needs more input before it can continue.
 
-  * [Technical Background](#technical-background)
-  * [Prompting Methods](#prompting-methods)
-    * [Method Arguments](#method-arguments)
-    * [Return Values](#return-values)
-  * [Code Examples](#code-examples)
-    * [Bash](#bash)
-    * [Python](#python)
-    * [Ruby](#ruby)
+## Prompting methods
 
-## Technical Background
+- `PromptForReply(regexID, prompt)`
+- `PromptThreadForReply(regexID, prompt)`
+- `PromptUserForReply(regexID, user, prompt)`
+- `PromptUserChannelForReply(regexID, user, channel, prompt)`
+- `PromptUserChannelThreadForReply(regexID, user, channel, thread, prompt)`
 
-Interactive plugins are complicated by the fact that multiple plugins can be running simultaneously and each can request input from the user. **Gopherbot** handles requests for replies this way:
+The method you choose depends on who should receive the prompt and whether the exchange should stay inside a thread.
 
-1. If there are no other plugins waiting for a reply for the given user/channel, the robot emits the prompt and waits to hear back from the user
-2. If other plugins are waiting for a reply, the prompt is not emitted and the request goes in to a list of waiters
-3. As other plugins get replies (or timeout while waiting), waiters in the list get a `RetVal` of `RetryPrompt`, indicating they should issue the prompt request again (this is handled internally in individual scripting libraries)
+## Matching replies
 
-## Prompting Methods
+`regexID` can refer to a custom reply matcher from plugin or job configuration, or one of the stock matchers:
 
-The following methods are available for prompting for replies:
-* `PromptForReply(regexID string, prompt string)` - issue a prompt to whoever/wherever the original command was issued
-* `PromptUserForReply(regexID string, user string, prompt string)` - for prompting the user in a direct message (DM) (for e.g. a password or other sensitive information)
-* `PromptUserChannelForReply(regexID string, user string, channel string, prompt string)` - prompt a specific user in a specific channel (for e.g. getting approval from another user for an action)
+- `Email`
+- `Domain`
+- `OTP`
+- `IPAddr`
+- `SimpleString`
+- `YesNo`
 
-### Method arguments
-The `user` and `channel` arguments are obvious; the `prompt` is the question the robot is
-asking the user, and should usually end with a `?`.
+## Return values
 
-The `regexID` should correspond to a `ReplyMatcher` defined in the plugin configuration,
-(see [Plugin Configuration](Configuration.md#plugin-configuration)), or one of the
-built-in regex's:
-*	`Email`
-* `Domain` - an alpha-numeric domain name
-* `OTP` - a 6-digit one-time password code
-* `IPAddr`
-* `SimpleString` - Characters commonly found in most english sentences, doesn't include special characters like @, {, etc.
-* `YesNo`
+In Go, the methods return `(reply, retVal)`.
 
-### Return Values
+In the scripting bindings, the result is usually an object that includes the matched reply plus the return code.
 
-Two distinct values are returned from the prompting methods:
-1. A `RetVal` indicating success or error condition - `Reply.ret`
-2. When `RetVal` == `Ok`, the matched string is also returned - `Reply.reply`
+Common return codes:
 
-In **Go**, these are returned as two separate values; in most scripting
-languages, these are returned as a compound object whose string representation
-is the returned string in `Reply.reply` (if the `RetVal` was `Ok`, otherwise it's the empty string).
+- `Ok`
+- `UserNotFound`
+- `ChannelNotFound`
+- `MatcherNotFound`
+- `Interrupted`
+- `TimeoutExpired`
+- `UseDefaultValue`
+- `ReplyNotMatched`
 
-Possible values for the `RetVal` in `Reply.ret` are:
-* `Ok` - If the user replied and the reply matched the regex identified by `regexID`
-* `UserNotFound`, `ChannelNotFound` - When an invalid user / channel is provided
-* `MatcherNotFound` - When an invalid matcher is supplied
-* `Interrupted` - If the user issues a new command to the robot (see NOTE below), too many `RetryPrompt` values are returned (>3), or the user replies with a single dash: '`-`' (cancel)
-* `TimeoutExpired` - If the user says nothing for 45 seconds
-* `UseDefaultValue` - If the user replied with a single equal sign (`=`)
-* `ReplyNotMatched` - When the reply from the user didn't match the supplied regex (the user was probably talking to somebody else)
+## Examples
 
-## Code Examples
+### Go
+```go
+func handler(r robot.Robot, args ...string) robot.TaskRetVal {
+    answer, rv := r.PromptForReply("YesNo", "Do you want to continue?")
+    if rv != robot.Ok {
+        r.Say("No reply received.")
+        return robot.Normal
+    }
+    r.Say("You answered: %s", answer)
+    return robot.Normal
+}
+```
+
+### Lua
+```lua
+local gopherbot = require("gopherbot_v1")
+local ret = gopherbot.ret
+local Robot = gopherbot.Robot
+
+local bot = Robot:new()
+local answer, rv = bot:PromptForReply("YesNo", "Do you want to continue?")
+if rv ~= ret.Ok then
+  bot:Say("No reply received.")
+else
+  bot:Say("You answered: " .. answer)
+end
+```
+
+### JavaScript
+```javascript
+const { Robot, ret } = require("gopherbot_v1")();
+
+const bot = new Robot();
+const answer = bot.PromptForReply("YesNo", "Do you want to continue?");
+if (answer.retVal !== ret.Ok) {
+  bot.Say("No reply received.");
+} else {
+  bot.Say(`You answered: ${answer.reply}`);
+}
+```
+
 ### Bash
 ```bash
-# Note that bash isn't object-oriented
-REPLY=$(PromptForReply "YesNo" "Do you like kittens?")
-if [ $? -ne 0 ]
+ANSWER=$(PromptForReply "YesNo" "Do you want to continue?")
+if [ $? -ne $GBRET_Ok ]
 then
-	Reply "Eh, sorry bub, I'm having trouble hearing you - try typing faster?"
+  Say "No reply received."
 else
-  if [[ $REPLY == y* ]] || [[ $REPLY == Y* ]]
-  then
-    Say "No kidding! Me too!"
-  else
-    Say "Oh, come on - you're kidding, right?!?"
-  fi
+  Say "You answered: $ANSWER"
 fi
 ```
 
 ### Python
 ```python
-rep = bot.PromptForReply("YesNo", "Do you like kittens?")
-if rep.ret != Robot.Ok:
-  bot.Say("Eh, sorry bub, I'm having trouble hearing you - try typing faster?")
+answer = bot.PromptForReply("YesNo", "Do you want to continue?")
+if answer.ret != Robot.Ok:
+    bot.Say("No reply received.")
 else:
-  reply = rep.__str__()
-  if re.match("y.*", reply, flags=re.IGNORECASE):
-    bot.Say("No kidding! Me too!")
-  else:
-    bot.Say("Oh, come on - you're kidding, right?!?")
+    bot.Say("You answered: %s" % answer)
 ```
 
 ### Ruby
 ```ruby
-rep = bot.PromptForReply("YesNo", "Do you like kittens?")
-if rep.ret != Robot::Ok
-  bot.Say("Eh, sorry bub, I'm having trouble hearing you - try typing faster?")
+answer = bot.PromptForReply("YesNo", "Do you want to continue?")
+if answer.ret != Robot::Ok
+  bot.Say("No reply received.")
 else
-  reply = rep.to_s()
-  if /y.*/i =~ reply
-    bot.Say("No kidding! Me too!")
-  else
-    bot.Say("Oh, come on - you're kidding, right?!?")
-  end
+  bot.Say("You answered: #{answer}")
 end
 ```
