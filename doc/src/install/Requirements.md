@@ -1,17 +1,24 @@
-# Software Requirements
+# Requirements
 
-> Up-to-date with v2.6
+## Runtime requirements
 
-Since **Gopherbot** is primarily a *Go* daemon that utilizes external tools and scripts to perform most of the real work, you'll probably want to have most of the (common) listed dependencies. Note that if you deploy your robot in a container, these are included in the base container, which you can further customize by adding your own tools.
+- Linux. Gopherbot is developed and tested as a Linux-first tool.
+- A shell account where you can run long-lived processes and keep a working directory for each robot.
+- `git` and `ssh` if you want bootstrap, update, or repository handoff workflows.
+- A team-chat platform or local connector setup appropriate for your robot.
 
-* `git` - with version 2, **Gopherbot** is tightly integrated with git for updating configuration and keeping state; **Gopherbot** requires fairly recent versions of *git* supporting `git remote get-url ...`
-   * Note that the version of *git* in CentOS 7 is not supported, see the [Inline with Upstream Stable](https://ius.io/) site for a newer version
-* `ssh` - robots configured from this manual require *ssh* for setup and deployment; additionally, most robots should have an encrypted private key / public key pair for performing *git* operations and running remote jobs
-* `bash` - the majority of the *batteries included* scripts included with **Gopherbot** are written in good 'ol **Bash**; this is nearly universal but listed here for those that may wish to build containers from scratch, since many base containers have much less functional `/bin/sh` shells. (busybox for example)
-* `jq` - required by the `gopherbot/lib/gopherbot_v1.sh` **bash** library for parsing the **JSON** responses from the robot
-   * Note this is available from the [EPEL](https://fedoraproject.org/wiki/EPEL) repositories for CentOS 7
-* `python` - (version 3) next to `bash`, the second most common language for extensions is **python** version 3, which includes several management jobs
+## Build requirements
 
-**Optional**
-* `ruby` - Ruby isn't heavily used with the default extensions, but is a supported language and included in the pre-built containers
-* `go` - While Gopherbot is written in *Go*, writing plugins in Go is considered an advanced topic and not well covered in this manual
+If you are building from source instead of using a release archive:
+
+- Go 1.24 or newer
+- `make`
+- standard build utilities such as `tar` and `gzip` if you want packaged archives
+
+## What you do not need for the default v3 workflow
+
+- A dev container just to write plugins
+- A `cbot`-style helper wrapper
+- External interpreters for every language up front
+
+You can still use Bash, Python, or Ruby extensions, but the modern path is to start with the built-in interpreters and Go support already included in the engine.

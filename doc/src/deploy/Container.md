@@ -1,24 +1,27 @@
-# Running in a Container
+# Container Deployment
 
-> NOTE: This section is **outdated**.
+Containers are still a valid deployment target. They are simply no longer the default development workflow.
 
-A major goal for **Gopherbot** v2 was container-native operation, and the ability to run your robot with all it's functionality and state/context, without requiring a persistent volume mount or a custom image with your robot baked-in. You can launch your robot using any of the [stock images](https://github.com/orgs/lnxjedi/packages); you should only need to create a custom image if your robot requires specific extra tools or libraries to do it's work, such as e.g. an ldap client or specific python module.
+## Good use cases
 
-This section gives an example of running your robot with docker/podman, but otherwise doesn't delve in to the specifics of running your robot in any particular container environment. Whether your robot runs as a persistent container on a Docker host, or as a managed container in a Kubernetes or Openshift cluster - or elsewhere - the same principles apply. If you're planning on deploying in a container, it is presumed that you're already running other containerized workloads, and can provide the requirements by common means for your container environment.
+- you already operate Kubernetes or another container platform
+- you want immutable engine images and environment-driven robot bootstrap
+- your team already manages secrets and restart policy through an orchestrator
 
-The contents of your robot's `.env` file are all that's needed - the built-in **bootstrap** plugin will use your robot's `deploy_key` key to clone it's configuration from `GOPHER_CUSTOM_REPOSITORY`, then use the `GOPHER_ENCRYPTION_KEY` to decrypt the `manage_key` ssh private key to restore file-backed memories if you use the default `file` brain for the standard robot.
+## What to keep in mind
 
-## Container Considerations
+- Build and test the robot locally first.
+- Treat the container as a deployment wrapper around the same robot, not as a separate authoring environment.
+- Provide the same critical environment values you would keep in `.env` on a VM.
+- Avoid running multiple production instances of the same robot unless you have explicitly designed for that.
 
-### Backing up State and Memories
-The standard robot includes a `backup` job in the stock `robot.yaml`. You can modify this to set the frequency of backups. The underlying job uses `git status --porcelain` to determine if a backup is needed, so there's little overhead in the case where memories don't change frequently. Since new memories tend to come in batches - for instance, adding bookmarks with the links plugin - an hourly schedule probably strikes a good balance between keeping the `robot-state` branch updated while not creating too many small commits.
+## Typical bootstrap model
 
-The **bootstrap** plugin will trigger a restore during start-up, so launching your robot into a new, empty container should restore it's state and memories automatically. Take care that you don't run multiple production instances of your robot; not only would this run the risk of corrupting state, but this can produce strange behavior in your team chat.
+An empty working directory inside the container is fine as long as you provide:
 
-### Providing Environment Variables
-When launching your robot in a container, you'll need to provide the environment variables defined in the robot's `.env` file. There are two primary ways of accomplishing this:
-* Both `docker` and `podman` allow you to set environment variables with a `--env-file .env` argument
-* Container orchestration environments or e.g. `docker-compose` provide other means of providing these values; take care that the value for `GOPHER_ENCRYPTION_KEY` doesn't get committed to a repository
+- `GOPHER_ENCRYPTION_KEY`
+- `GOPHER_CUSTOM_REPOSITORY`
+- `GOPHER_DEPLOY_KEY`
+- any environment selector or connector overrides your robot depends on
 
-### Setting the `GOPHER_PROTOCOL` Environment Variable
-When starting `gopherbot` at the CLI, or using systemd, the value for `GOPHER_PROTOCOL` should be commented out in the `.env`; however this value is required for launching in a container so that your robot will start and connect to your team chat.
+On startup, Gopherbot will clone the robot repo, load config, and continue as a normal robot.

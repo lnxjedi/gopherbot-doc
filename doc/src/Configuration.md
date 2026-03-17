@@ -1,5 +1,16 @@
-# Configuring Gopherbot
+# Configuration Reference
 
-> NOTE: This chapter has not been updated for **Gopherbot** version 2, but has reference material that may be of use when examining default and standard configuration.
+Gopherbot configuration is built from two layers:
 
-**Gopherbot** has very powerful and flexible configuration capabilities based on *yaml* templates. The core concept is simple; **Gopherbot** ships with default configuration in the `conf/` directory of the installation archive, and individual robots can modify and override the default configuration with environment variables and custom configuration files. This chapter examines the configuration system in detail.
+- installed defaults from the engine
+- custom overrides from your robot
+
+The modern v3 layout is intentionally more structured than older versions:
+
+- `custom/conf/robot.yaml` for robot-wide policy
+- `custom/conf/environments/` for environment-specific defaults
+- `custom/conf/protocols/` for connector-local config
+- `custom/conf/brains/` and `custom/conf/history/` for provider settings
+- `custom/conf/plugins/` and `custom/conf/jobs/` for plugin and job metadata
+
+This structure is the backbone of the v3 manual because it is also the backbone of the runtime.

@@ -1,8 +1,27 @@
-# Availability by Channel
-Individual **Gopherbot** robots normally limit commands to certain channels, contextually; for instance, the "build" command may be limited to a job channel, where developers can all "see" each other starting builds. Generally speaking, limiting commands to select channels is fairly common for a **Gopherbot** robot. By adding `Channels: [ "foo", "bar" ]` to a plugin's `*.yaml` configuration file, an administrator can easily override the default channels for a given plugin.
+# Channels, DMs, and Threads
 
-## Default Channels
-Many of the robot's plugins aren't context-sensitive, and can be available anywhere. Practically, however, you might want to limit these to a small number of channels to prevent common channels from getting junked up with robot noise. The slack protocol configuration for the standard robot has:
-```
-DefaultChannels: [ "general", "random" ]
-```
+Availability is a first-class part of Gopherbot command design.
+
+## Channels
+
+Many commands are intentionally limited to specific channels. That is normal for operational robots. For example:
+
+- build or deploy commands may only belong in a job channel
+- support commands may only belong in a support channel
+- noisy or playful commands may be kept out of primary work channels
+
+## Direct messages
+
+Some commands are better in DM, especially when they:
+
+- prompt for follow-up input
+- reveal sensitive data
+- would create too much channel noise
+
+## Threads
+
+Threads matter in Gopherbot. The engine tracks thread context and many plugins use it to keep long workflows contained. On connectors that support threads well, replying in-thread is usually the cleanest way to run multi-step operations.
+
+## Practical takeaway
+
+If a command works somewhere else but not here, it is often a channel-placement issue rather than a typo. Use `help <keyword>` or `commands` in the current context to see what is actually available.

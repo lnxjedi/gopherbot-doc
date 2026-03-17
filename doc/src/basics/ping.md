@@ -1,24 +1,30 @@
-# Addressing your Robot and using Ping
+# Addressing the Robot
 
-Most chat platforms provide some kind of capability for "mentioning" your robot using an `@...` syntax; normally, prefixing a message with your robot's mention name will cause it to process the message as a command. For maximum compatibility when switching chat platforms, **Gopherbot** robots all have a regular 'name' like 'Floyd' which they recognize, as well as a single-character 'alias'. To verify your robot "hears" messages, you would normally use the single "ping" command, which defaults to being available in all the channels where the robot is present. Here are some examples of using "ping" with **Floyd**, whose alias is `;`:
+Every robot has both:
+
+- a regular name, such as `floyd`
+- a one-character alias, such as `;`
+
+Both are valid ways to address a command.
+
+## Common patterns
+
+```text
+;ping
+floyd, ping
+floyd: ping
+ping, floyd
 ```
-c:general/u:alice -> floyd, ping
-general: @alice PONG
-c:general/u:alice -> ;ping
-general: @alice PONG
-c:general/u:alice -> floyd ping
-general: @alice PONG
-c:general/u:alice -> floyd: ping
-general: @alice PONG
-c:general/u:alice -> ping, floyd
-general: @alice PONG
-c:general/u:alice -> ping
-c:general/u:alice -> floyd
-general: @alice PONG
-c:general/u:alice -> ping
-c:general/u:alice -> ;
-general: @alice PONG
-c:general/u:alice -> ping floyd
-c:general/u:alice ->
-```
-The last three examples are instructive: 1) if you type a command for your robot but forget to address the robot, typing the robot's name or alias alone as your next message will cause it to process your previous message as a command if done within a short period of time. 2) While "\<command\>, \<botname\>" is considered a command, "\<command\> \<botname\>" (without a comma) is not; this allows the robot to be discussed (e.g. "try using floyd") without the robot parsing it as a command.
+
+`ping` is the canonical first command because it is usually available everywhere the robot is present.
+
+## A useful routing nuance
+
+If you send what looks like a command but forget to address the robot, many connectors support the follow-up pattern of sending just the bot name or alias as your next message. That tells the robot to interpret the previous message as if it had been addressed.
+
+## Hidden commands
+
+Some connectors support hidden messages, such as Slack slash commands or SSH hidden messages. Hidden messages are not a free bypass:
+
+- the command still has to be explicitly allowed as hidden by the plugin
+- the message still has to be treated as addressed to the robot

@@ -1,5 +1,16 @@
-# Deploying to Kubernetes
+# Kubernetes Example
 
-> NOTE: This section is **outdated**.
+Kubernetes is a good fit when:
 
-Eventually, as Kubernetes eats the world, this will be **THE** way to run your **Gopherbot** robot. It's the platform of choice for my own production robot, `Data`, who runs my CI/CD pipelines and other jobs. For now, this is somewhat experimental. If you have a k8s cluster, and [helm 3](https://helm.sh/), see the `README.md` in `resources/helm-gopherbot` of the **Gopherbot** archive.
+- your team already deploys operational tooling in-cluster
+- you want secrets and restart behavior managed by the platform
+- the robot's external dependencies fit cleanly into a container image
+
+The repository ships an example manifest at `resources/deploy-gopherbot.yaml` and Helm material under `resources/helm-gopherbot/`.
+
+## Minimum checklist
+
+- store the robot's environment values as a Kubernetes secret
+- mount or inject those values into the container
+- run only one production instance for a given robot unless you have planned for coordination
+- ship any extra system dependencies in the image instead of assuming they exist in the cluster

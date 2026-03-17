@@ -1,14 +1,23 @@
-## Notes on Writing Documentation for Developers
+## Writing Docs Locally
 
-Gopherbot documentation is written in Markdown and processed by [`mdbook`](https://github.com/rust-lang/mdBook) to be published with [Github Pages](https://lnxjedi.github.io/gopherbot).
+The Gopherbot manual is an `mdbook` project.
 
-These instructions are primarily for me (David Parsley) to remind me of the few steps in setting up a dev environment for writing Gopherbot documentation, which I primarily do on a Chromebook with Linux (Crostini) installed.
+### Preview locally
 
-1. Check the VM IP with `ip addr show dev eth0` and make sure `/etc/hosts` lists the IP ad `penguin.linux.test`
-1. Download the `mdbook` binary to `$HOME/bin/mdbook`; make sure `$HOME/bin` is added to `$PATH` in `~/.bashrc`
-1. Run `mdbook serve -n penguin.linux.test` from the `doc/` directory
-1. View the work in progress in the browser at `http://penguin.linux.test:3000`
+```bash
+cd doc
+mdbook serve
+```
 
-## CI/CD Notes
+Then open the URL printed by `mdbook`, usually `http://127.0.0.1:3000`.
 
-Whenever the `master` branch is updated, the pipeline automatically updates the `gh-pages` branch (if documentation changed).
+### Build once
+
+```bash
+cd doc
+mdbook build
+```
+
+## Publishing
+
+The published manual is served from GitHub Pages. This repository contains the source; the rendered output is published separately.

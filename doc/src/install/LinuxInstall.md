@@ -1,7 +1,45 @@
-# Installation on Linux
+# Build from Source
 
-> Up-to-date with v2.6
+If you want the latest engine changes, build Gopherbot from a source checkout and keep that checkout as your install tree.
 
-Note that Gopherbot is currently Linux-only. Earlier versions ran on MacOS - and even Windows (with support for PowerShell plugins!) - but these platforms have fallen out of use. Patches are welcome if you'd like to maintain one of these platforms, and I'd be happy to provide advice and assistance. If you have a Mac with Docker installed or Windows with WSL and Docker, you can still use the `cbot.sh` bash script for setting up and running a container-based robot on your Mac or Windows machine.
+## Build steps
 
-The rest of this section assumes you'll be installing **Gopherbot** from a pre-built archive or source on a Linux host.
+```bash
+git clone https://github.com/lnxjedi/gopherbot.git
+cd gopherbot
+make gopherbot
+```
+
+That leaves you with a `gopherbot` binary in the repository root.
+
+## Important detail
+
+Do not copy just the binary somewhere else and throw the checkout away. The executable looks for shipped defaults and resources relative to its own location. A working source-based install tree includes at least:
+
+- `gopherbot`
+- `conf/`
+- `lib/`
+- `resources/`
+- `plugins/`
+- `jobs/`
+- `tasks/`
+- `robot.skel/`
+
+## Typical source-based workflow
+
+```bash
+git clone https://github.com/lnxjedi/gopherbot.git ~/src/gopherbot
+cd ~/src/gopherbot
+make gopherbot
+
+mkdir -p ~/robots/acme
+cd ~/robots/acme
+~/src/gopherbot/gopherbot
+```
+
+In that example:
+
+- `~/src/gopherbot` is the engine install tree
+- `~/robots/acme` is the robot home
+
+That split is the normal v3 authoring workflow.

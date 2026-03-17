@@ -1,25 +1,34 @@
-# Status of the Gopherbot Software
+# Status
 
-The project as a whole is going on 7 years old, and the core v1 functionality is fairly robust. On the other hand, some of the original plugins (like duo two factor) have suffered from bit-rot and may not function correctly; good news, though - the "knock knock joke" plugin definitely works.
+Gopherbot is in the middle of the v3 transition. The important point for users is that the current engine behavior is real and usable now, even though some long-tail features and connectors are still evolving.
 
-The new job, task, pipeline and cron functionality for v2 is pretty heavily used and I have a good deal of confidence in it. The CI/CD functionality is unmaintained and not very functional. Similarly, the logging functionality and commands are not 100%.
+The docs in this book were reorganized in March 2026 around the workflow the project actually supports today:
 
-I'm a little sorry that the only currently supported team chat connector is **Slack**, because that's what my team uses. This is definitely a "scratching my own itch" kind of project, and it's hard to motivate myself to write connectors for protocols I don't use. I'd be happy to work with others on this, however.
+- develop and run the engine locally on a Linux workstation
+- keep robot configuration in git
+- prefer built-in interpreters and current v3 config structure
+- treat containers as a deployment target, not the default authoring environment
 
-# Status of this Manual
+That also means some older ideas are intentionally de-emphasized here. The old container-first development story is no longer the center of the manual, and helper workflows built around that era should be considered historical unless they are documented in this book.
 
-**December '22 / January '23 - The manual is being actively revised for the new Gopherbot IDE.**
+## What is current
 
-This manual is a work in progress; currently incomplete and partly outdated. This section will be removed when the manual is considered complete. For now, to help you make the most of the manual, this is the current state of the different sections:
+- The startup and configuration model documented here matches the current v3 engine defaults and robot skeleton.
+- The SSH connector is the default local-development connector.
+- Slack remains the primary production team-chat connector.
+- Multi-protocol runtime support, `PrimaryProtocol`, `SecondaryProtocols`, and username-authoritative identity are part of the current model.
+- `BasicMarkdown` is the default outgoing message format unless you set another one explicitly.
 
-## Front Matter
-The foreword, introduction and terminology pages should be up to date.
+## What is still moving
 
-## Build and Installation
-These sections are frequently updated to track with current development.
+- Some included plugins and older integrations are still catching up to v3 expectations.
+- Connector coverage is still uneven across platforms; this manual focuses on what is supported and maintained today.
+- The engine still evolves faster than the user manual at times, so the shipped defaults and example repositories remain useful companion references.
 
-## Configuration Reference
-The section on environment variables is updated fairly often, as well as the section on configuration file loading. The sections dealing with actual contents of configuration files was woefully outdated and need to be replaced. The best place to look for examples of legal configuration is the defaults in `conf/`.
+## How to read this book
 
-## Extension Development and APIs
-These sections fairly out of date and in need of TLC.
+If you are new to Gopherbot, start with Part I and build a local robot first.
+
+If you already run older robots, jump to [Configuration Reference](Configuration.md) and [Upgrading Existing Robots](Upgrading.md).
+
+If you are writing automation, Part III is the modern starting point after you are comfortable with the local workflow.

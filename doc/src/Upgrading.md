@@ -1,5 +1,31 @@
-# Upgrading from Version 1
+# Upgrading Existing Robots
 
-The following sections detail the required and optional changes for upgrading a robot from version 1 to version 2. Over the course of developing version 2, there were several intermediary states for different configuration options that are not described here. If you need information on upgrading from any of these intermediary states, please [open an issue](https://github.com/lnxjedi/gopherbot/issues/new).
+For v3, extension compatibility is a higher priority than configuration compatibility.
 
-Note that this chapter is not exhaustive in the changes required for updating your robot. The best approach would be to set up a new robot, then port your customizations from version 1; the API hasn't changed, but there are configuration changes described here. Another approach might be to set up a new test robot to understand the v2 robot architecture, then examine the contents of `robot.skel` and incrementally update your robot to the v2 standard.
+That means many older plugins and jobs can keep working, while robot configuration often needs deliberate migration.
+
+## Highest-priority migration items
+
+1. Move to `PrimaryProtocol` and optional `SecondaryProtocols`.
+2. Put connector-local identity mapping inside each connector's `ProtocolConfig`.
+3. Keep `UserRoster` as the canonical global user directory.
+4. Move provider-specific settings into `conf/brains/<provider>.yaml` and `conf/history/<provider>.yaml`.
+5. Expect `DefaultMessageFormat` to be `BasicMarkdown` unless you set something else explicitly.
+
+## Identity changes to care about
+
+- authorization is username-based
+- `IgnoreUnlistedUsers` is username-based
+- Slack `UserMap` is connector-local
+- SSH user mapping belongs in `ProtocolConfig.UserKeys`
+
+## Practical upgrade advice
+
+The safest migration path is usually:
+
+1. scaffold a fresh v3-style robot
+2. compare it with your existing robot
+3. port your custom config and extensions into the new layout
+4. test locally before touching production
+
+That approach usually goes faster than trying to rescue a heavily mutated old config tree in place.

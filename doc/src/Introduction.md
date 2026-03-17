@@ -4,21 +4,23 @@
 
 To help give you an idea of the kinds of tasks you can accomplish, here are a few of the things my teams have done with **Gopherbot** over the years:
 
-* Generating and destroying [AWS](https://aws.amazon.com) instances on demand
-* Running software build, test and deploy pipelines, triggered by git service integration with team chat
-* Updating service status on the department website
-* Allowing support personnel to search and query user attributes
-* Running scheduled backups to gather artifacts over `ssh` and publish them to an artifact service
-* Occasionally - generating silly memes
+- Generating and destroying [AWS](https://aws.amazon.com) instances on demand
+- Running software build, test and deploy pipelines, triggered by git service integration with team chat
+- Updating service status on the department website
+- Allowing support personnel to search and query user attributes
+- Running scheduled backups to gather artifacts over `ssh` and publish them to an artifact service
+- Occasionally generating silly memes
 
-The primary strengths of **Gopherbot** stem from its simplicity and flexibility. It installs and bootstraps readily on a VM or in a container with just a few environment variables, and can be run behind a firewall where it can perform tasks like rebooting server hardware over IPMI. Simple command plugins can be written in `bash`, `python` or `ruby`, with easy to use encrypted secrets for accomplishing privileged tasks. Like any user, the robot can also have its own (encrypted, naturally) ssh key for performing remote work and interfacing with *git* services.
+The primary strengths of **Gopherbot** stem from its simplicity and flexibility. In v3, the preferred workflow is to run the engine directly on a Linux workstation while you build and test your robot locally, then deploy that same robot where it belongs later. Gopherbot still bootstraps cleanly onto servers and containers, but local development is now the default story rather than a special case.
 
-The philosophy underlying **Gopherbot** is the idea of solving the most problems with the smallest set of general purpose tools, accomplishing a wide variety of tasks reasonably well. The interface is much closer to a CLI then a Web GUI, but it's remarkable what can be accomplished with a shared CLI for your team's infrastructure.
+Simple command plugins can still be written in `bash`, `python` or `ruby`, but v3 leans much harder on built-in interpreters and Go-based extensions so robots depend on fewer external tools. Like any user, the robot can also have its own encrypted `ssh` key for performing remote work and interfacing with *git* services.
+
+The philosophy underlying **Gopherbot** is the idea of solving the most problems with the smallest set of general purpose tools, accomplishing a wide variety of tasks reasonably well. The interface is much closer to a CLI than a web GUI, but it's remarkable what can be accomplished with a shared CLI for your team's infrastructure.
 
 The major design goals for **Gopherbot** are reliability and portability, leaning heavily on "configuration as code". Ideally, custom add-on plugins and jobs that work for a robot instance in [Slack](https://slack.com) should work just as well if your team moves, say, to [Rocket.Chat](https://rocket.chat). This goal ends up being a trade-off with supporting specialized features of a given platform, though the **Gopherbot** API enables platform-specific customizations if desired.
 
-Secondary but important design goals are configurability and security. Individual commands can be constrained to a subset of channels and/or users, require external authorization or elevation plugins, and administrators can customize help and command matching patterns for stock plugins. **Gopherbot** has been built with security considerations in mind from the start; employing strong encryption, privilege separation, and a host of other measures to make your robot a difficult target for potential attackers.
+Secondary but important design goals are configurability and security. Individual commands can be constrained to a subset of channels and/or users, require external authorization or elevation plugins, and administrators can customize help and command matching patterns for stock plugins. **Gopherbot** has been built with security considerations in mind from the start, employing strong encryption, privilege separation, and a host of other measures to make your robot a difficult target for potential attackers.
 
-Version 2 for the most part assumes that your robot will employ encryption and get its configuration from a *git* repository. Other deployments are possible, but not well documented. This manual will focus on working with **Gopherbot** instances whose configuration is stored on [GitHub](https://github.com), but other *git* services are easy to use, as well.
+Modern Gopherbot still assumes that serious robots keep configuration in git, and this manual continues to focus on that model. The big difference is that the day-to-day authoring loop now starts on your workstation: run the engine locally, edit the robot repo locally, reload quickly, and only then hand that robot off to a server, VM, or container.
 
 That's it for the "marketing" portion of this manual - by now you should have an idea whether **Gopherbot** would be a good addition to your DevOps tool set.

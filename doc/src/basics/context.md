@@ -1,15 +1,19 @@
-# Context
+# Message Context
 
-Commands can be configured to store certain matched fields as labeled context items, e.g. "item" or "list". This feature is somewhat experimental, but could occasionally be useful. A somewhat contrived example uses the "list" and "item" contexts with the aforementioned links and lists plugins:
-```
-c:general/u:alice -> !link broiled salmon to https://cooking.com/salmon.html
-general: Link added
-c:general/u:alice -> !add it to the dinner meals list
-general: @alice I don't have a 'dinner meals' list, do you want to create it?
-c:general/u:alice -> yes
-general: Ok, I created a new dinner meals list and added broiled salmon to it
-c:general/u:alice -> !link tuna casserole to https://cooking.com/tuna.html
-general: Link added
-c:general/u:alice -> !add it to the list
-general: Ok, I added tuna casserole to the dinner meals list
-```
+Gopherbot keeps track of more than just message text. Context can include:
+
+- the user
+- the protocol
+- the channel
+- the thread
+- labeled values captured by command matchers
+
+That context is what lets plugins do useful follow-up behavior without inventing their own ad-hoc state machine for every conversation.
+
+## Examples
+
+- prompting a user and waiting for the reply in the same channel or thread
+- remembering the current list name or item in a short workflow
+- continuing a threaded conversation without polluting the main channel
+
+Context is intentionally scoped. In v3, thread-scoped memory includes protocol context so different connectors do not collide with each other.

@@ -1,11 +1,38 @@
-# Running with Systemd
+# Run with systemd
 
-One way of running your robot is to use a **systemd** unit file on a systemd-managed Linux host:
+`systemd` is the easiest long-running deployment target for most Linux robots.
 
-* Copy `resources/robot.service` to `/etc/systemd/system/<botname>.service` and edit with values for your system; you'll need to create a local user, and a directory for your robot that the user can write to
-* Reload `systemd` with `systemctl daemon-reload`
-* Enable the service with `systemctl enable <botname>`
-* Place your robot's `.env` in the robot's home directory, mode `0400`, owned by the robot user; you can leave `GOPHER_PROTOCOL` commented out, since the value should be set in the `<botname>.service` file
-* Start the service: `systemctl start <botname>`
+## Recommended shape
 
-That's it! Your robot should start and connect to your team chat.
+1. Install the engine in a stable location such as `/opt/gopherbot`.
+2. Create a dedicated robot home such as `/srv/robots/acme`.
+3. Create a dedicated Unix user for that robot.
+4. Put the robot's `.env` in the robot home with restrictive permissions.
+5. Copy and adapt `resources/robot.service` or `resources/user-robot.service`.
+
+## Minimal service pattern
+
+```ini
+[Service]
+Type=simple
+WorkingDirectory=/srv/robots/acme
+ExecStart=/opt/gopherbot/gopherbot -plainlog
+Restart=on-failure
+TimeoutStopSec=600
+```
+
+## Notes
+
+- Keep the engine install tree and the robot home separate.
+- The robot home should be writable by the robot user.
+- `TimeoutStopSec=600` is intentional; Gopherbot tries to finish in-flight pipelines during graceful shutdown.
+- Prefer configuring protocol and behavior in `custom/conf/` and `.env` instead of stuffing everything into `Environment=` lines.
+
+## Bring it up
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable acme-bot
+sudo systemctl start acme-bot
+sudo systemctl status acme-bot
+```

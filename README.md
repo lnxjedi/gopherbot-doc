@@ -1,1 +1,15 @@
-This repository holds the markdown sources for the documentation at [lnxjedi.github.io/gopherbot](https://lnxjedi.github.io/gopherbot). The rendered pages are kept in the `gh-pages` branch of the main [gopherbot repository](https://github.com/lnxjedi/gopherbot), just to make the documentation URL look nice (and stick with what it has been previously).
+This repository holds the mdBook sources for the public Gopherbot manual at [lnxjedi.github.io/gopherbot](https://lnxjedi.github.io/gopherbot).
+
+The book is being rewritten around the current v3 workflow:
+
+- local workstation development first
+- git-managed robot configuration
+- built-in interpreters and modern config layout
+- containers as a deployment target, not the default authoring environment
+
+To preview locally:
+
+```bash
+cd doc
+mdbook serve
+```

@@ -36,12 +36,14 @@ shift
 configure(){
 	cat <<"EOF"
 ---
-Help:
-- Keywords: [ "repeat" ]
-  Helptext: [ "(bot), repeat (me) - prompt for and trivially repeat a phrase" ]
-CommandMatchers:
+Commands:
 - Command: "repeat"
   Regex: '(?i:repeat( me)?)'
+  Usage: "repeat (me)"
+  Summary: "prompt for and trivially repeat a phrase"
+  Examples:
+  - "(bot) repeat me"
+  Keywords: [ "repeat" ]
 EOF
 }
 
