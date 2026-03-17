@@ -1,7 +1,6 @@
 [book]
 authors = ["David Parsley"]
 language = "en"
-multilingual = false
 src = "src"
 title = "Gopherbot DevOps Chatbot"
 [build]

@@ -1,4 +1,4 @@
-<h1>Gopherbot</br>DevOps Chatbot</h2>
+<h1>Gopherbot<br>DevOps Chatbot</h1>
 
 ![Gophers+bot by Renee French, cropped, cc3.0](gopherbot.png)
 
