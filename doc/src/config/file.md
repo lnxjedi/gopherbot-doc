@@ -16,13 +16,9 @@ That merge model is why some connector-local identity data uses lists instead of
 
 ## Template expansion
 
-Config files are Go text templates. The most important helpers are:
+Config files are Go text templates before they are parsed as YAML. This applies to `robot.yaml`, included environment files, protocol files, provider files, plugin files, and job files.
 
-- `env`
-- `default`
-- `decrypt`
-- `.Include`
-- `GetStartupMode`
+See [Config Templates](templates.md) for the helper reference, examples, and secret/variable guidance.
 
 ## Example
 

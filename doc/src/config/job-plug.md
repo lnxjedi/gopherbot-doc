@@ -15,6 +15,8 @@ Examples:
 - `AdminUsers`
 - `UserRoster`
 
+See the [`robot.yaml` reference](robot-yaml.md) for the full list of top-level options.
+
 ## Detailed config lives in dedicated files
 
 - connector config: `conf/protocols/<protocol>.yaml`

@@ -54,7 +54,9 @@
 
 # Part IV - Reference
 - [Configuration Reference](Configuration.md)
+  - [robot.yaml Reference](config/robot-yaml.md)
   - [Config Loading and Merge Rules](config/file.md)
+  - [Config Templates](config/templates.md)
   - [Plugins, Jobs, Tasks, and Providers](config/job-plug.md)
   - [Environment Variables](Environment-Variables.md)
   - [Troubleshooting](config/troubleshooting.md)
