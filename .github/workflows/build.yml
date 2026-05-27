@@ -7,41 +7,49 @@ on:
   pull_request:
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - name: Download and verify mdBook
+        env:
+          MDBOOK_VERSION: "0.5.3"
+          EXPECTED_HASH: "e2fd508a4fac06cbaa9f88b97d27bdc3b55a08946304ca845879fe26a3699e11"
+        run: |
+          ARCHIVE="mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+          curl -sSL -O "https://github.com/rust-lang/mdBook/releases/download/v${MDBOOK_VERSION}/${ARCHIVE}"
+          echo "${EXPECTED_HASH}  ${ARCHIVE}" | sha256sum -c -
+          tar -xzf "${ARCHIVE}"
+          echo "$PWD" >> "$GITHUB_PATH"
+
+      - name: Build docs
+        run: mdbook build doc
 
       - name: Checkout gopherbot/gh-pages
-        uses: actions/checkout@v2
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/checkout@v4
         with:
           repository: lnxjedi/gopherbot
           persist-credentials: false
-          fetch-depth: 0
-          path: gopherbot-doc
+          fetch-depth: 1
+          path: ghpages
           ref: gh-pages
 
-      - name: Setup mdBook
-        # peaceris/actions-mdbook v2.0.0
-        uses: peaceiris/actions-mdbook@ee69d230fe19748b7abf22df32acaa93833fad08
-        with:
-          mdbook-version: 'latest'
+      - name: Sync built docs to gh-pages
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: rsync -a --delete --exclude='.git' doc/book/ ghpages/
 
-      - name: Build
-        run: |
-          mv gopherbot-doc/.git ghpages.git
-          mdbook build -d ../gopherbot-doc ./doc
-          mv ghpages.git gopherbot-doc/.git
-
-      - name: Commit and push
-        shell: bash
+      - name: Commit and push to gh-pages
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_PUSH_TOKEN }}
         run: |
-          cd gopherbot-doc
-          git config --local user.email "parsley@linuxjedi.org"
-          git config --local user.name "David Parsley"
+          cd ghpages
+          git config user.email "parsley@linuxjedi.org"
+          git config user.name "David Parsley"
           git add -A
-          git commit -m "Automated update" || exit 0
-          git push https://parsley42:${GITHUB_TOKEN}@github.com/lnxjedi/gopherbot gh-pages
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Automated update from ${GITHUB_SHA}"
+          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/lnxjedi/gopherbot.git" gh-pages
