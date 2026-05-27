@@ -1,34 +1,5 @@
 # Plugins, Jobs, Tasks, and Providers
 
-The important v3 rule is that selectors and definitions are separated from detailed config.
+This page has moved into [Configuration Overview](file.md).
 
-## Robot-wide selectors live in `robot.yaml`
-
-Examples:
-
-- `PrimaryProtocol`
-- `DefaultProtocol`
-- `SecondaryProtocols`
-- `Brain`
-- `HistoryProvider`
-- `DefaultMessageFormat`
-- `AdminUsers`
-- `UserRoster`
-
-See the [`robot.yaml` reference](robot-yaml.md) for the full list of top-level options.
-
-## Detailed config lives in dedicated files
-
-- connector config: `conf/protocols/<protocol>.yaml`
-- brain config: `conf/brains/<provider>.yaml`
-- history config: `conf/history/<provider>.yaml`
-- plugin config: `conf/plugins/<plugin>.yaml`
-- job config: `conf/jobs/<job>.yaml`
-
-## Why this matters
-
-This keeps config boundaries clean:
-
-- transport concerns stay with connectors
-- provider concerns stay with providers
-- command and help metadata stays with the plugin that owns it
+The important v3 rule is still the same: `robot.yaml` selects robot-wide behavior and declares extensions, while dedicated files hold detailed connector, provider, plugin, and job configuration.

@@ -36,6 +36,8 @@
   - [Updating and Reloading](usage/update.md)
   - [Administrative Commands](usage/admin.md)
   - [Logging](usage/logging.md)
+- [Security and Access Control](Security-Overview.md)
+  - [User Approval Elevation](security/userapproval.md)
 
 # Part III - Writing Automation
 - [Extending Your Robot](customizing.md)
@@ -54,10 +56,10 @@
 
 # Part IV - Reference
 - [Configuration Reference](Configuration.md)
+  - [Configuration Overview](config/file.md)
   - [robot.yaml Reference](config/robot-yaml.md)
-  - [Config Loading and Merge Rules](config/file.md)
+  - [Plugin Config Reference](config/plugin-yaml.md)
   - [Config Templates](config/templates.md)
-  - [Plugins, Jobs, Tasks, and Providers](config/job-plug.md)
   - [Environment Variables](Environment-Variables.md)
   - [Troubleshooting](config/troubleshooting.md)
 - [BasicMarkdown Reference](BasicMarkdown.md)

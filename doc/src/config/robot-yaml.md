@@ -64,22 +64,7 @@ The included environment file commonly sets `PrimaryProtocol`, `DefaultProtocol`
 
 Like other Gopherbot config files, `robot.yaml` is expanded as a template before it is parsed as YAML. See [Config Templates](templates.md) for the common helper reference, include behavior, and secret/variable guidance.
 
-Merge behavior:
-
-- maps merge recursively
-- scalar values replace earlier values
-- arrays replace earlier arrays by default
-- arrays append only when the custom key starts with `Append`
-
-Example:
-
-```yaml
-AppendUserRoster:
-- UserName: bob
-  Email: bob@example.com
-```
-
-`AppendUserRoster` appends to the merged `UserRoster` and is processed as `UserRoster`. Use this carefully: replacing arrays is usually safer for security-sensitive lists such as users, admins, protocols, and channels.
+See [Configuration Overview](file.md) for the full loading, merge, override, and `Append*` behavior.
 
 Unknown top-level keys are startup errors. `BrainConfig`, `HistoryConfig`, and `QueueConfig` are also rejected in `robot.yaml`; put those in their dedicated provider files.
 
@@ -345,10 +330,10 @@ Optional.
 `DefaultElevator` names the elevation plugin used when a plugin command requires elevation but does not specify its own `Elevator`.
 
 ```yaml
-DefaultElevator: totp
+DefaultElevator: builtin-userapproval
 ```
 
-Elevation is checked after base authorization succeeds.
+Elevation is checked after base authorization succeeds. For the built-in human approval elevator, see [User Approval Elevation](../security/userapproval.md).
 
 ## Brain, History, and Queues
 

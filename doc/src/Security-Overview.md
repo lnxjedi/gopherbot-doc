@@ -30,6 +30,8 @@ Authorization is useful for all kinds of cases where a given plugin may be avail
 ## Elevation
 Finally, if the user passes the authorization check, the robot will then check for elevation if a given command is listed in `ElevatedCommands` or `ElevateImmediateCommands`. Elevation behaves similarly to `sudo`, in that the user may be required to supply a second form of authentication (mfa / 2fa) before an action is allowed. Individual elevation plugins may be configurable with a timeout for `ElevatedCommands`, such that a user can continue to perform elevated operations for a period of time before re-authentication is required. As the name suggests, `ElevateImmediateCommands` will _always_ require mfa, and should therefore be used sparingly, especially if the mfa method is onerous (e.g. `totp`).
 
+Some elevators use a human approval flow instead of personal MFA. The built-in [`builtin-userapproval`](security/userapproval.md) elevator lets a configured approver approve or deny a sensitive command.
+
 # Hardened Design
 
 ## Privilege Separation
