@@ -4,4 +4,3 @@ language = "en"
 src = "src"
 title = "Gopherbot DevOps Chatbot"
 [build]
-build-dir = "/tmp/mdbook"
