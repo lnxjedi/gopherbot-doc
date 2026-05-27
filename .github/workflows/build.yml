@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: lnxjedi/gopherbot
-          persist-credentials: false
+          token: ${{ secrets.REPO_PUSH_TOKEN }}
           fetch-depth: 1
           path: ghpages
           ref: gh-pages
@@ -43,8 +43,6 @@ jobs:
 
       - name: Commit and push to gh-pages
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        env:
-          GITHUB_TOKEN: ${{ secrets.REPO_PUSH_TOKEN }}
         run: |
           cd ghpages
           git config user.email "parsley@linuxjedi.org"
@@ -52,4 +50,4 @@ jobs:
           git add -A
           git diff --cached --quiet && echo "No changes to commit" && exit 0
           git commit -m "Automated update from ${GITHUB_SHA}"
-          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/lnxjedi/gopherbot.git" gh-pages
+          git push origin gh-pages
