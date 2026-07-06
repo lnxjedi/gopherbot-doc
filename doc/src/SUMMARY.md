@@ -62,6 +62,8 @@
   - [Config Templates](config/templates.md)
   - [Environment Variables](Environment-Variables.md)
   - [Troubleshooting](config/troubleshooting.md)
+- [Command Authoring Reference](reference/README.md)
+  - [SimpleMatcher](reference/SimpleMatcher.md)
 - [BasicMarkdown Reference](BasicMarkdown.md)
 - [Robot API Overview](api/API-Introduction.md)
   - [Language Choices](api/Languages.md)

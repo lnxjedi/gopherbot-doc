@@ -13,10 +13,12 @@ ExternalPlugins:
 
 ## 2. Add matcher and help metadata in `custom/conf/plugins/hello.yaml`
 
+For ordinary directed commands, use `SimpleMatcher`. See the [SimpleMatcher reference](../reference/SimpleMatcher.md) when you need captures, choices, options, or detailed matching rules.
+
 ```yaml
 Commands:
 - Command: hello
-  Regex: '(?i:hello)$'
+  SimpleMatcher: "hello"
   Usage: "hello"
   Summary: "reply with a friendly greeting"
   Examples:

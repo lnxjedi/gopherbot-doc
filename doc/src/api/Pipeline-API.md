@@ -24,6 +24,27 @@ Gopherbot pipelines are built in code rather than declared in a separate pipelin
 - `SpawnJob(...)` starts work in parallel, while `AddJob(...)` adds a child job into the current pipeline flow.
 - `Exclusive(...)` is the advisory lock for protecting shared resources such as worktrees or deployment targets.
 
+## Privileged tasks
+
+`Privileged: true` on a task means the task requires the current pipeline to already be privileged. `AddTask(...)`, `FinalTask(...)`, and `FailTask(...)` do not elevate an unprivileged pipeline; if unprivileged code tries to add a privileged task, the engine rejects the request.
+
+Use this for tasks that need robot-owned credentials or tools that should not be exposed to ordinary plugin code. For example, a task that runs `kubectl` with a robot-managed kubeconfig should be declared privileged. Only a privileged job, a privileged plugin, or code already running inside a privileged pipeline can add that task:
+
+```yaml
+ExternalTasks:
+  "kubectl-apply":
+    Path: tasks/kubectl-apply.gsh
+    Description: Apply Kubernetes manifests with the robot kubeconfig
+    Privileged: true
+```
+
+```go
+// This must run from a privileged job/plugin pipeline.
+r.AddTask("kubectl-apply", "clusters/prod/payment-api.yaml")
+```
+
+For plugins and jobs, `Privileged: true` also controls whether that plugin or job starts a privileged pipeline. For tasks, it is a requirement on the owning pipeline.
+
 `SetWorkingDirectory(...)` exists in the public Go API, but it is currently omitted from this user-facing reference until that area is revisited.
 
 ## Examples

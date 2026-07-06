@@ -2,6 +2,8 @@
 
 Help in v3 is command-linked, so good help starts with good command metadata.
 
+Most directed commands should use `SimpleMatcher`; see the [SimpleMatcher reference](../reference/SimpleMatcher.md) for the full command grammar. Help text should show what users type, not every detail of the matcher grammar.
+
 ## Recommended fields
 
 - `Usage`: the command body only
@@ -14,7 +16,7 @@ Help in v3 is command-linked, so good help starts with good command metadata.
 ```yaml
 Commands:
 - Command: deploy
-  Regex: '(?i:deploy ([A-Za-z0-9._/-]+))'
+  SimpleMatcher: "deploy <branch:token>"
   Usage: "deploy <branch>"
   Summary: "deploy the named git branch to the selected environment"
   Examples:

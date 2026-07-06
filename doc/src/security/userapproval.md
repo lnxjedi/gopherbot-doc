@@ -112,6 +112,8 @@ Commands:
   SimpleMatcher: "rollback <service:ident>"
 ```
 
+These are ordinary directed command matchers; see the [SimpleMatcher reference](../reference/SimpleMatcher.md) for matcher syntax details.
+
 If the robot has `DefaultElevator: builtin-userapproval`, those commands use user approval automatically.
 
 To use this elevator for one plugin only, set `Elevator` in that plugin config:

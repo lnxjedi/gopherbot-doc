@@ -658,7 +658,7 @@ ExternalTasks:
     Description: Render a report artifact
 ```
 
-External tasks default to `Privileged: false` when `Privileged` is omitted. A privileged task cannot be added to an unprivileged pipeline.
+External tasks default to `Privileged: false` when `Privileged` is omitted. A privileged task cannot be added to an unprivileged pipeline; `Privileged: true` on a task means the task requires a privileged pipeline, not that the task can elevate the pipeline. For example, a task that runs `kubectl` with a robot-managed kubeconfig should be marked privileged and added only by a privileged job or plugin.
 
 ### GoTasks
 

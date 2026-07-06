@@ -130,7 +130,7 @@ Capture groups become positional arguments to the plugin.
 
 ### SimpleMatcher
 
-`SimpleMatcher` is the preferred syntax for common directed commands.
+`SimpleMatcher` is the preferred syntax for common directed commands. This section gives the shape; see the [SimpleMatcher reference](../reference/SimpleMatcher.md) for the complete grammar, capture semantics, typed values, option blocks, diagnostics, and migration guidance.
 
 ```yaml
 Commands:
@@ -138,7 +138,7 @@ Commands:
   SimpleMatcher: "set log level {to} (level:trace|debug|info|warn|error)"
 ```
 
-Simple matchers are case-insensitive, tolerate extra whitespace, and treat spaces in the spec as matching either spaces or dashes in user input.
+Simple matchers are case-insensitive and tolerate extra whitespace. Spaces between command words can be typed as spaces or dashes, but one contiguous command phrase must use one separator style consistently. Spaces before typed captures and options require whitespace. For example, `spot (type:rails|devops) up` matches `spot-devops-up`, while `rails up [<branch:token>]` matches `rails-up dev`, but not `rails-up-dev`.
 
 Common forms:
 
@@ -147,8 +147,11 @@ Common forms:
 - `/start|begin/`: required non-capturing synonyms
 - `(label:a|b|c)`: required capturing choice
 - `[label:a|b|c]`: optional capturing choice
+- `[-options:-spot|-branch:<token>]`: optional argv-style options block; matched options become individual args
 - `<name:ident>`: typed capture
 - `[<name:rest>]`: optional typed capture
+
+Options blocks emit no argument when omitted. Captures after an options block are variable-position, so plugins using them should parse leading `-` arguments before interpreting the remaining positional arguments.
 
 Built-in capture types include `ident`, `token`, `rest`, `number`, `decimal`, `bool`, `duration`, `email`, `url`, `ip`, `ipv4`, `ipv6`, `cidr`, `dnsname`, `slug`, and `base64`.
 
