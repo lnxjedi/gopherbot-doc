@@ -152,17 +152,17 @@ rails-up-branch:dev
 |---|---|---:|
 | `literal words` | Required command text. Spaces between command words can be typed as spaces or dashes. | No |
 | `{word}` | Optional non-capturing text. Good for polite words or articles. | No |
-| `{a|b|c}` | Optional non-capturing choices. | No |
-| `/a|b|c/` | Required non-capturing synonyms. | No |
-| `(label:a|b|c)` | Required capturing choice. | Yes |
-| `(:a|b|c)` | Required capturing choice with no label. | Yes |
-| `[label:a|b|c]` | Optional capturing choice. Adds `""` when omitted. | Yes |
-| `[:a|b|c]` | Optional capturing choice with no label. Adds `""` when omitted. | Yes |
+| `{a\|b\|c}` | Optional non-capturing choices. | No |
+| `/a\|b\|c/` | Required non-capturing synonyms. | No |
+| `(label:a\|b\|c)` | Required capturing choice. | Yes |
+| `(:a\|b\|c)` | Required capturing choice with no label. | Yes |
+| `[label:a\|b\|c]` | Optional capturing choice. Adds `""` when omitted. | Yes |
+| `[:a\|b\|c]` | Optional capturing choice with no label. Adds `""` when omitted. | Yes |
 | `<type>` | Required typed capture. | Yes |
 | `<name:type>` | Required typed capture with a diagnostic label. | Yes |
 | `[<type>]` | Optional typed capture. Adds `""` when omitted. | Yes |
 | `[<name:type>]` | Optional typed capture with a diagnostic label. Adds `""` when omitted. | Yes |
-| `[-label:-flag|-name:&lt;type&gt;]` | Optional options block. Matched options become individual arguments. Adds no argument when omitted. | Variable |
+| `[-label:-flag\|-name:&lt;type&gt;]` | Optional options block. Matched options become individual arguments. Adds no argument when omitted. | Variable |
 
 The punctuation characters are part of the SimpleMatcher grammar, not regex delimiters. If your command depends on regex escaping or regex-specific precedence, use `Regex`.
 
