@@ -18,6 +18,7 @@ Environment variables influence both startup and task execution.
 
 Tasks receive a cleaned environment plus pipeline-specific values. Common examples include:
 
+- `GOPHER_ENVIRONMENT`
 - `GOPHER_PROTOCOL`
 - `GOPHER_USER`
 - `GOPHER_CHANNEL`
@@ -30,4 +31,13 @@ Tasks receive a cleaned environment plus pipeline-specific values. Common exampl
 - `GOPHER_START_THREAD_ID`
 - `GOPHER_START_USER`
 
-For task authors, the practical rule is simple: prefer the Robot API for important values, and use the environment for integration with external scripts and tools.
+`GOPHER_ENVIRONMENT` selects environment-specific robot configuration at
+startup. It is also exposed to extensions as runtime metadata. The standard v3
+authoring convention is to treat `GOPHER_ENVIRONMENT=development` as a local
+prove-it mode: plugins that manage host state, cloud resources, firewall rules,
+or persistent robot memory should validate inputs and report intended actions
+without making those changes.
+
+For task authors, the practical rule is simple: use `GetParameter(...)` for
+important values, because it sees explicit parameters and runtime metadata. Use
+the process environment for integration with external scripts and tools.

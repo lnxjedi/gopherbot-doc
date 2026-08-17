@@ -18,6 +18,12 @@ Gopherbot pipelines are built in code rather than declared in a separate pipelin
 
 ## Important behavior notes
 
+- `GetParameter(...)` reads explicit task/plugin/job and pipeline parameters
+  first, then falls back to engine runtime metadata such as `GOPHER_USER`,
+  `GOPHER_CHANNEL`, `GOPHER_PROTOCOL`, and `GOPHER_ENVIRONMENT`.
+- `GOPHER_ENVIRONMENT=development` is the common v3 signal for dry-run or
+  prove-it behavior in extensions that would otherwise change host state,
+  external systems, or persistent robot memory.
 - `AddCommand(...)` composes another plugin command into the current pipeline. It is not the same thing as injecting a fresh user message.
 - `FinalTask(...)` runs during cleanup even if the main pipeline fails.
 - `FailTask(...)` and `FailCommand(...)` only run when the primary pipeline fails.
