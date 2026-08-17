@@ -1,15 +1,14 @@
-This repository holds the mdBook sources for the public Gopherbot manual at [lnxjedi.github.io/gopherbot](https://lnxjedi.github.io/gopherbot).
+This repository is the historical source snapshot for the Gopherbot user
+manual. It no longer publishes the manual.
 
-The book is being rewritten around the current v3 workflow:
+The maintained source lives with the engine in
+[`gopherbot/docs/`](https://github.com/lnxjedi/gopherbot/tree/main/docs), and
+the published manual remains available at
+[lnxjedi.github.io/gopherbot](https://lnxjedi.github.io/gopherbot).
 
-- local workstation development first
-- git-managed robot configuration
-- built-in interpreters and modern config layout
-- straightforward deployment to VMs, systemd, or containers
-
-To preview locally:
+To preview or contribute to the manual, clone the main Gopherbot repository
+and run:
 
 ```bash
-cd doc
-mdbook serve
+mdbook serve docs
 ```
